@@ -200,200 +200,292 @@ Let's start with the basics: creating a new location.
 
 ## Understanding the Hierarchy
 
-Every location has a family tree. Your setup might look like:
+Every location has a family tree. Instead of scrolling a wall of rows, think in terms of levels:
 
-```
-Main Warehouse
-  └─ Receiving Zone
-      └─ Staging Area
-          └─ Bin A-47
-```
+| Level | Example | What Inherits Downstream | When to Drill In |
+| --- | --- | --- | --- |
+| Warehouse / Store | `Main Warehouse` | Global policies, SLA targets, facility alerts | Facility-level capacity, cross-dock enablement |
+| Zone | `Receiving Zone`, `Cold Storage Zone` | Temperature ranges, certification requirements, automation toggles | Spot congestion or enforce special handling |
+| Sub-Zone / Area | `Staging Area`, `QA Hold` | Task routing, put-away rules | Manage micro-flows within a zone |
+| Bin | `BIN-A-47`, `PALLET-ROW-03` | Capacity, cycle count frequency | Confirm what is physically there |
 
-When you view Bin A-47, you see the full path: Main Warehouse > Receiving Zone > Staging Area > Bin A-47. Click any part of that path to jump straight there. This breadcrumb navigation helps you understand context instantly—you know where you are and how to get anywhere else.
+Breadcrumbs at the top of each location (for example, `Main Warehouse > Receiving Zone > Staging Area > BIN-A-47`) are live links—use them to jump levels instantly.
 
-**Using hierarchy to your advantage:**
+::: tip Hierarchy Pro Moves
+- **Set rules once:** apply temperature or hazmat flags at the zone and let all bins inherit them. No more mismatched settings.  
+- **Watch rollups:** when a zone spikes to 90% utilization, you already know every bin inside needs help.  
+- **Guard access:** certification requirements live on the zone; anyone scanning a child bin sees the same warning.  
+- **Stay organized:** group alike-with-alike so audits and training stay intuitive.
+:::
 
-**Set rules once** — Set temperature requirements on the "Frozen Zone," and every bin inside automatically inherits it. Change one setting and all children follow. This prevents configuration drift where some bins have the right settings and others don't.
+#### Move-with-Confidence Workflow
 
-**Track capacity trends** — If Receiving Zone hits 90%, you know all the bins inside are tight. You don't need to check each bin individually—the zone tells you the overall situation. Look at zone-level metrics to spot problems before they cascade.
+1. Open the location, choose **Move**.  
+2. Search or navigate to the intended parent.  
+3. Use the compatibility preview—temperature, ownership, hazard rules must align.  
+4. Confirm. The system prevents circular references or unsafe moves automatically.
 
-**Control access** — Mark a hazmat zone as requiring certification, and the system enforces it for every location inside. Workers scanning bins in that zone see the certification requirement automatically. You don't train people on individual bins; you train them on zones.
+<details>
+<summary>Hands-on: Rehome a Bin Safely</summary>
 
-**Organize logically** — Group similar locations under common parents. All cold storage bins under "Cold Storage Zone," all receiving bins under "Receiving Zone." When you need to find or operate on similar locations, you know where to look.
+1. In sandbox, open `BIN-STAGE-05`.  
+2. Attempt to move it into `Dry Storage Zone`—note the cooling rule mismatch warning.  
+3. Cancel and instead select `Cold Storage Zone` where the rule matches.  
+4. Confirm the move, then open the zone to ensure the bin now inherits the cold-storage automation.
 
-**To move a location in the hierarchy:**
+</details>
 
-1. Open the location you want to move
-2. Select "Move"
-3. Choose the new parent location
-4. Preview the change to see if any rules conflict
-5. Confirm the move
+### Quick Confidence Check
 
-The system checks compatibility before allowing the move. You can't accidentally move a frozen bin into a non-refrigerated zone—it will warn you about the temperature mismatch. You can't move a parent inside its own child (creating a circular reference). These guardrails prevent hierarchy corruption.
-
-**Viewing child locations:**
-
-Open any location and view its children to see what's inside. A warehouse shows its zones, a zone shows its bins. Children are listed with their capacity, status, and current inventory. This lets you drill down from high-level (warehouse) to specific (bin) or stay at whatever level makes sense for your task.
+<LearningQuiz
+  question="You clone a refrigerated bin into a standard zone. What happens when you try to save?"
+  :options="[
+    'The move is blocked because temperature rules conflict',
+    'The system silently converts the zone to refrigerated',
+    'The bin keeps its cold rules while the zone stays ambient'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Hierarchy validation stops unsafe moves before they go live.',
+    'Zones never auto-convert; edits are explicit.',
+    'Children cannot enforce rules the parent forbids.'
+  ]"
+/>
 
 ---
 
 ## Finding Locations Quickly
 
-**Basic search:**
-Type "Bin A-47" in the search box. You'll see the location, its current capacity, and its status. Search matches names, codes, and common abbreviations. It's fast and forgiving—partial matches work.
+| Shortcut | When to Use | What You Get Back |
+| --- | --- | --- |
+| Type `Bin A-47` | You know the code | Location card with status, utilization, parent path |
+| Type `receiving zone` | Need a functional area | List of zones ordered by utilization + capacity indicators |
+| Type `frozen < 50%` | Need space with conditions | Cold-storage zones/bins under 50% full and ready to use |
+| Type `quarantine active` | Audit or inspection mode | All locations currently blocking picks, with reason + timer |
 
-**Smart search:**
-You can search by characteristics and the system understands context:
-- "frozen storage less than 50% full" — Find available cold storage
-- "quarantine active" — See all inspection hold areas that are operational
-- "receiving zone" — Show all receiving locations
+The search box accepts natural phrases (`"frozen storage less than 50% full"`) and prioritizes results that satisfy your intent. If you're about to store frozen goods, ambient zones automatically fall to the bottom.
 
-The system prioritizes useful results. Looking for a place to store frozen goods? It shows frozen zones with available capacity first, not frozen zones that are full or inactive. It understands what you're trying to accomplish and helps you get there.
+::: tip Power Filters
+- **Status** – isolate Active vs Frozen vs Archived to keep noisy results out.  
+- **Type** – laser-focus on bins versus service vehicles.  
+- **Capacity range** – find the Goldilocks zone (not empty, not overloaded).  
+- **Parent** – spotlight every child under a problem zone instantly.  
+- Combine them: *Active + Type=Bin + Parent=Receiving + Utilization > 80%* → the bins you must fix first.
+:::
 
-**Using filters:**
+<details>
+<summary>Try It: Build a “Hot Spots” view</summary>
 
-Filters narrow results systematically:
+1. Open Locations → Search, type `zone utilization > 80`.  
+2. Add filters: **Type = Zone**, **Status = Active**.  
+3. Sort by utilization descending and bookmark the results.  
+4. During stand-up, pull this view to discuss load balancing plans.
 
-**Status filter** — Show only Active, Frozen, Inactive, Quarantine, or Archived locations. Useful when you're auditing frozen locations or cleaning up inactive ones.
+</details>
 
-**Type filter** — Limit to Warehouse, Zone, Bin, Service Vehicle, Customer Site, etc. When you're looking for all service vehicles to plan restocking, filter to that type.
+### Quick Confidence Check
 
-**Capacity range** — Show only locations between 30-70% full. Great for finding locations with room to grow but not so empty they're wasted space.
-
-**Parent location filter** — See everything inside a specific zone. When Zone B needs attention, filter to show all children and spot the problem bins.
-
-**Combine filters** for powerful queries: "Show me all active bins in the Receiving Zone that are more than 80% full." This finds exactly what needs immediate attention.
-
-**Saved searches:**
-
-Can't find a saved search feature in the contracts, but basic search with filters is powerful enough for most needs.
+<LearningQuiz
+  question="Which filter combo surfaces pick bins that are nearly full in Receiving?"
+  :options="[
+    'Status=Active, Type=Bin, Parent=Receiving Zone, Utilization >= 80%',
+    'Type=Zone, Status=Archived, Utilization <= 20%',
+    'Type=Service Vehicle, Status=Frozen'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Those parameters zero in on busy receiving bins.',
+    'Archived zones with low utilization are irrelevant for hot bins.',
+    'Frozen service vehicles don’t help with receiving congestion.'
+  ]"
+/>
 
 ---
 
 ## Checking What's Stored Where
 
-**To view inventory at a location:**
+**One-click state view**
+1. Open a location → **Inventory** tab.  
+2. Review the state chips (Available, Allocated, In Transit, Reserved).  
+3. Hover to see percentages vs total capacity and recent movement.
 
-1. Open the location
-2. Go to the "Inventory" section
-3. See what products are there, how many units, and their states (available, allocated, in transit, etc.)
+::: info Serial / Lot Tracking
+If the item is serialized or lot-controlled, expand the row to view full traceability: serial number, lot code, expiration, and the last transaction on that unit. During recalls, filter by lot and jump straight to the responsible bin.
+:::
 
-The inventory view breaks down by product. Each product shows quantities by state: how much is available for sale, how much is allocated to orders, how much is in transit. This state-level detail helps you understand not just what's there, but what you can actually use.
+**Own vs 3PL vs Customer**
+- The ownership column shows who owns each quantity slice.  
+- Click an owner to filter—critical when you operate consignment or VMI programs.  
+- The system blocks cross-owner consumption, so use this view to reconcile before billing.
 
-**For serial or lot-tracked items:**
-You'll also see serial numbers or lot codes listed. This is crucial for traceability—if you need to recall a lot or find a specific serial, you know exactly where it is.
+### Rollups When You Need the Big Picture
 
-**Ownership breakdown:**
-If you manage inventory for multiple companies or customers, you'll see how much belongs to each owner. This prevents accidentally selling or using someone else's stock.
+| You Want To Know | Use This | Why It Helps |
+| --- | --- | --- |
+| Inventory inside a zone | `Inventory Rollup` on the zone | Aggregates products across every child bin instantly |
+| Category health | Group by **Category** | Compare fast movers vs slow movers without exporting |
+| Units in different measures | Group by **UOM** | See pallets + cases + eaches simultaneously |
+| Yesterday vs Today | Set the **As Of** timestamp | Investigate deltas, build audit trail |
 
-**Inventory rollup across hierarchy:**
+<details>
+<summary>Lab: Find the missing 20 units</summary>
 
-**To see all inventory in a zone (and its children):**
+1. Take note of current quantity in `Zone - Staging`.  
+2. Switch **As Of** to yesterday 08:00.  
+3. Compare: yesterday shows 120 units, today 100 units.  
+4. Click the 20 unit delta to open the transaction list—spot the transfer that occurred overnight.  
+5. Add a note in the investigation log linking to that transfer.
 
-1. Open the zone
-2. Go to "Inventory Rollup"
-3. Choose grouping: by product, by category, or by unit of measure
-4. Optionally set depth: include all descendants or just go down a few levels
-5. Optionally include child breakdowns to see how inventory distributes
+</details>
 
-**What you see:**
-- **By product** — Total units of each product across all child locations
-- **By category** — Total inventory for product categories (useful for high-level planning)
-- **By UOM** — Aggregated in different units (pallets, cases, units) depending on what makes sense
+### Quick Confidence Check
 
-**Why this is powerful:**
-You can check inventory at any level. Want to know how much is in your entire warehouse? Roll up from the warehouse root. Want to know what's in Zone A? Roll up from Zone A. Need to compare Zone A and Zone B? Roll up each separately and compare.
-
-**Point-in-time views:**
-You can ask "what was here yesterday?" by using the as-of parameter. This is invaluable for investigations: "We had 100 units yesterday, now we have 80—what happened?" Roll up inventory as of yesterday, compare to today, and investigate the 20-unit difference.
+<LearningQuiz
+  question="How do you confirm who owns the stock before invoicing a customer site?"
+  :options="[
+    'Filter the ownership column in the inventory view',
+    'Export the entire warehouse inventory to CSV',
+    'Delete the inventory so ownership is zero'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Ownership filtering keeps billing accurate and auditable.',
+    'Exports are unnecessary for a simple ownership check.',
+    'Deleting stock loses traceability and revenue.'
+  ]"
+/>
 
 ---
 
 ## Managing Capacity
 
-Capacity is more than "full" or "empty." It's about understanding trends and acting before problems hit.
+Capacity is more than "full" or "empty." Think of it as a heartbeat you monitor continuously.
 
-**Checking capacity:**
+### Capacity Dashboard Checklist
 
-Open any location to see:
-- **Total capacity** — Maximum space available
-- **Current usage** — How much is occupied right now
-- **Available space** — What's left
-- **Utilization percentage** — The key number to watch
-- **Reserved** — Space allocated but not yet filled
-- **In use** — Active space being used
+- **Total capacity** – the maximum, in pallets / cubic units / weight.  
+- **Current usage** – live occupied space.  
+- **Reserved** – committed but not yet consumed.  
+- **Utilization %** – the score everyone watches.  
+- **Projected full date** – where trends are pointing.
 
-**Setting and adjusting alert thresholds:**
+::: warning Tune Alert Thresholds
+1. Open the location → **Thresholds**.  
+2. Set **Warning** (e.g., 75%) to cue “watch this.”  
+3. Set **Critical** (e.g., 90%) to trigger action.  
+4. Set **Max** (e.g., 95%) for a hard stop.  
+5. Review after two weeks: too many false alarms? Nudge the numbers.
+:::
 
-1. Open the location
-2. Go to "Alerts" or "Thresholds"
-3. Set your warning levels:
-   - Warning at 75% — Yellow light, pay attention
-   - Critical at 90% — Red light, take action
-   - Maximum at 95% — Hard stop
+| Location Type | Suggested Warning / Critical / Max | Why |
+| --- | --- | --- |
+| Fast-moving staging | 85% / 95% / 98% | Turnover is rapid—you can run hot |
+| Long-term storage | 60% / 80% / 90% | Slow movement needs more buffer |
+| Service vehicles | 70% / 90% / 100% | Weight limits are absolute |
 
-These aren't one-size-fits-all. A staging area with fast turnover can run at 90% comfortably. Long-term storage with slow movement needs alerts at 60% because you can't clear space quickly.
+### Trend Triage Playbook
 
-**Adjust based on experience:**
-Start with defaults (75/90/95). After a few weeks, review which locations trigger alerts frequently. If you're constantly getting warnings but never hitting critical, raise the warning threshold. If you hit critical before you can react, lower it.
+- **Trend line climbing?** Check inbound schedule and overflow relationships.  
+- **Rate of change > 4% per day?** Trigger proactive transfers before the rush.  
+- **Projection shows critical within 48 hours?** Alert shift leads and reprioritize pick/put-away tasks.
 
-**Reading capacity trends:**
+<details>
+<summary>Simulation: Stay ahead of a surge</summary>
 
-The system doesn't just show current capacity—it shows patterns:
-- **Trend line** — Is capacity climbing, stable, or declining?
-- **Rate of change** — How fast is it filling? 5% per day or 5% per week?
-- **Projected full date** — "At current rate, you'll hit 90% by Thursday 2 PM"
+1. On Tuesday 09:00, Receiving shows 70% utilization with +5% daily trend.  
+2. Projection says 92% by Thursday 14:00.  
+3. Enable overflow to Zone B and schedule extra outbound picks Wednesday morning.  
+4. Re-run projection; if critical moves beyond 72 hours, your plan worked.
 
-**Example scenario:**
+</details>
 
-It's Tuesday morning. Receiving is at 70% capacity—comfortable. But the trend shows it's climbing 5% per day. The system projects you'll hit critical (90%) by Thursday afternoon. Three large shipments are arriving Thursday. Without the trend data, you'd think you're fine. With it, you know Thursday will be a problem.
+### Quick Confidence Check
 
-**Action:** Set up overflow relationships now (see Relationships section), or schedule some shipments to ship out Wednesday to free space.
+<LearningQuiz
+  question="Receiving is trending +6% per day and projected to hit 95% on Friday. What is the best proactive move?"
+  :options="[
+    'Activate overflow relationships and move freight out before Thursday',
+    'Raise the maximum threshold to 110% so alerts stop firing',
+    'Do nothing until it actually reaches 95%'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Create space before the surge—overflow plus early shipments keeps flow moving.',
+    'Thresholds above 100% remove safety margin and break controls.',
+    'Waiting guarantees congestion and emergency scrambling.'
+  ]"
+/>
 
 ---
 
 ## Freezing and Unfreezing Locations
 
-Sometimes you need to pause a location temporarily—during an audit, quality inspection, or maintenance.
+Sometimes you need to pause a location temporarily—cycle counts, inspections, maintenance.
 
-**To freeze a location:**
+### Freeze Playcard
 
-1. Open the location
-2. Click "Freeze"
-3. Add a reason (required) — "Quality inspection in progress" or "Cycle count in progress"
-4. Optionally set an expiration — "Unfreeze automatically at 5 PM today" or "Freeze for 24 hours"
-5. Confirm
+1. Open location → **Freeze**.  
+2. Choose a reason (required).  
+3. Set auto-unfreeze (date/time).  
+4. Confirm.
 
-**What happens when a location is frozen:**
-- No new inventory can be added (receipts blocked)
-- Nothing can be picked (picking blocked)
-- Automated processes skip this location entirely
-- Anyone scanning the location sees why it's frozen and when it unfreezes
-- The freeze is visible in location lists and search results
+**System impact immediately**
+- Receipts + picks blocked.  
+- Automation skips the frozen node.  
+- Scanners display the reason and release time.  
+- Status chips and search results show a freeze badge.
 
-**Why set automatic expiration:**
-So you don't forget to unfreeze after your work completes. "Freeze until 5 PM" means you don't have to remember to come back and unfreeze manually. The system handles it, and operations resume automatically.
+::: tip Auto-Unfreeze FTW
+Avoid sticky freezes by always setting an expiration (“Unfreeze at 17:00” or “Freeze for 4 hours”). The system restores the previous status automatically.
+:::
 
-**To unfreeze a location:**
+<details>
+<summary>API Quick Hit</summary>
 
-1. Open the frozen location
-2. Click "Unfreeze"
-3. Add a note (optional) — "Inspection complete, no issues found"
-4. Confirm
+```http
+POST /operations/locations/v1/locations/{locationId}/freeze
+{
+  "reason": "Cycle count in progress",
+  "releaseAt": "2025-10-15T17:00:00Z"
+}
+```
 
-The location immediately returns to its previous status (usually Active) and all normal operations resume. Items that were waiting can now be picked, new receipts can be accepted.
+```http
+POST /operations/locations/v1/locations/{locationId}/unfreeze
+{
+  "note": "Count complete, variances recorded"
+}
+```
 
-**When to freeze:**
-- **Cycle counting** — Freeze the location so counts aren't disrupted by movements
-- **Quality investigations** — Freeze while investigating damaged or suspect inventory
-- **Inspections** — Freeze during regulatory or internal audits
-- **Maintenance** — Freeze during repairs, cleaning, or reorganization
+</details>
 
-**Freezing entire zones:**
-You can freeze a zone, and all child locations inherit the freeze. This is powerful for large-scale operations: freeze the entire Receiving Zone during an audit, and every bin inside is locked. When you unfreeze the zone, all children unfreeze too.
+### When to Freeze
 
-**Real example:**
-A warehouse manager froze Zone C for four hours during a ceiling repair. The system automatically rerouted incoming shipments to overflow areas and notified the receiving team. Workers tried to put pallets in Zone C, their scanners showed "Frozen - Ceiling repair until 3 PM," and they went to the overflow zone instead. When the freeze lifted at 3 PM, everything returned to normal. No confusion, no lost inventory, no damaged goods from a leaky ceiling.
+- **Cycle counting** – lock movement so counters get a clean snapshot.  
+- **Quality investigations** – hold suspect stock until QA clears it.  
+- **Regulatory audits** – keep inspectors happy and evidence tidy.  
+- **Maintenance** – protect goods during repairs or sanitation.
+
+Freezing at the zone level cascades to every child—ideal when an entire area needs a pause.
+
+> **Case Study:** During a ceiling repair, Zone C was frozen for four hours. The system rerouted inbound ASNs to overflow, RF scanners displayed “Frozen – Ceiling repair until 15:00,” and once the auto-unfreeze triggered, operations resumed with no lost pallets or frantic calls.
+
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What is the safest way to unfreeze after a maintenance window?"
+  :options="[
+    'Let the auto-unfreeze release and add a completion note',
+    'Delete the location and recreate it so it is clean',
+    'Start moving pallets in before unfreezing to save time'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Auto-unfreeze keeps history intact and notes explain the release.',
+    'Deleting erases history and breaks references.',
+    'Moving inventory while frozen defeats the point of the control.'
+  ]"
+/>
 
 ---
 
@@ -401,39 +493,49 @@ A warehouse manager froze Zone C for four hours during a ceiling repair. The sys
 
 When you reorganize or close seasonal areas, you need to retire locations without losing their history.
 
-**To archive a location:**
+### Archive Decision Tree
 
-1. Ensure the location is empty (no inventory)
-2. Open the location
-3. Click "Archive"
-4. Add a reason — "Seasonal area closed for summer" or "Warehouse reorganization - bin no longer exists"
-5. Confirm
+1. **Is there inventory left?**  
+   - Yes → move or adjust inventory first.  
+   - No → proceed.
+2. **Is this a temporary pause?**  
+   - Yes → mark **Inactive** instead.  
+   - No → continue.  
+3. **Do you need historical reporting?**  
+   - Yes → archive.  
+   - No → still archive (never delete, history matters).
 
-**What happens when archived:**
-- The location disappears from normal searches and lists
-- It can't accept new inventory
-- Historical data remains for reports and audits (you can still see what was there and when)
-- You can still view it if you explicitly search for archived locations
-- You can reactivate it later if needed
+::: info Archive Workflow
+1. Ensure the location is empty.  
+2. **Archive** → add a reason (`"Seasonal zone closed Q1"`).  
+3. Location disappears from daily searches, blocks new inventory, but history stays intact.
+:::
 
-**Why archive instead of delete:**
-Deletion would break historical reports. If you delete a location, any historical transaction that referenced it becomes orphaned. You'd lose the ability to trace where items were stored last year. Archiving keeps history intact while removing clutter from daily operations.
+Need it back? Enable **Show Archived**, open the record, click **Activate**, choose the new status, and add a comeback note (e.g., `"Reopening for holiday surge"`).
 
-**To reactivate an archived location:**
+| Status | When to Use | Visibility | Movement Allowed |
+| --- | --- | --- | --- |
+| Active | Normal operations | Everywhere | All |
+| Inactive | Short pause, will return soon | Hidden unless filtered | None |
+| Frozen | Temporary lock for audits/maintenance | Visible with freeze badge | None |
+| Archived | Retired, keep history | Hidden unless archived filter | None |
 
-1. Search with "Show Archived" enabled
-2. Open the archived location
-3. Click "Activate"
-4. Add a note — "Reopening seasonal area for winter"
-5. Choose the new status (usually Active)
-6. Confirm
+### Quick Confidence Check
 
-The location returns to active use immediately. It can accept inventory, be included in searches, and function normally. All historical data is still there—you didn't lose anything during archiving.
-
-**Archive vs. Inactive vs. Frozen:**
-- **Inactive** — Temporarily not in use, plan to use it again soon. Hidden from most searches but easily reactivated.
-- **Frozen** — Temporarily locked for counting or investigation. Automatically unfreezes. Still visible and active, just locked.
-- **Archived** — Done with this location, probably forever. Requires explicit reactivation.
+<LearningQuiz
+  question="You’re closing a seasonal zone for six months with zero stock remaining. What’s the right status?"
+  :options="[
+    'Archive it with a note describing the closure',
+    'Delete the zone so reports stay short',
+    'Leave it active and hope nobody uses it'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Archiving keeps history clean and removes it from daily workflows.',
+    'Deleting erases audit trails.',
+    'Leaving it active invites mistakes.'
+  ]"
+/>
 
 ---
 
@@ -441,120 +543,60 @@ The location returns to active use immediately. It can accept inventory, be incl
 
 Labels and barcodes connect your digital system to the physical world. They're how workers interact with locations using scanners.
 
-**Understanding label templates:**
+### Label Template Gallery
 
-Label templates define what information appears on printed labels and how it's formatted. You might have:
-- **Standard Bin Labels** — Location code, name, capacity, parent zone
-- **Hazmat Labels** — All of the above plus safety warnings, required PPE, special handling icons
-- **Customer Site Labels** — Location code, customer name, contact information, site address
-- **Service Vehicle Labels** — Vehicle ID, assigned technician, capacity limits
+| Template | Use It For | Highlights |
+| --- | --- | --- |
+| Standard Bin | Everyday storage bins | Code, name, capacity, parent zone |
+| Hazmat | Dangerous goods | PPE icons, hazard class, hotline |
+| Customer Site | VMI / consignment | Customer info, contact, reconciliation cadence |
+| Service Vehicle | Technician vans | Vehicle ID, technician, weight limit |
 
-Different location types benefit from different templates. The template determines not just what prints, but colors, sizes, and layouts.
+Preview templates from the **Labels** tab—what you see is exactly what prints.
 
-**To view available label templates:**
+#### Quick Print (Single)
+1. Open location → **Labels**.  
+2. Pick a template, adjust printer/material if needed.  
+3. **Preview**, then **Print**.  
+4. Stick it on the physical location, scan once to verify.
 
-Go to the label templates section and see what's configured. Each template shows a preview and describes when to use it.
+#### Batch Print (Many)
+1. **Batch Labels** → select locations (by list, zone, or filtered search).  
+2. Choose template + printer/material.  
+3. Preview (optional), confirm.  
+4. Monitor the batch job (queued → printing → complete). Reprint any failures from the job log.
 
-**To preview a label for a specific location:**
+::: info Barcode Formats
+- **Code 128** – high-density, standard for bins.  
+- **Code 39** – simple legacy support.  
+- **QR / Data Matrix** – pack extra data for customer sites or vehicles.
+:::
 
-1. Open the location
-2. Go to "Labels"
-3. Choose a template
-4. Optionally customize printer profile, material, or color settings
-5. Click "Preview"
+<details>
+<summary>Generate Barcodes in Bulk</summary>
 
-The preview shows exactly what will print, including the location's actual data. This lets you verify before printing hundreds of labels.
+1. Go to **Batch Barcodes**.  
+2. Select the target locations.  
+3. Choose format (Code 128 for bins, QR for sites).  
+4. Generate → track job status.  
+5. Download the summary to hand off to the print room.
 
-**To generate a label for one location:**
+</details>
 
-1. Preview the label (as above)
-2. If it looks good, click "Print"
-3. Choose your printer
-4. Select material type (paper, polyester, laminated, etc.)
-5. Set number of copies
-6. Print
+#### Troubleshooting Checklist
+- Use **Barcode History** to see who generated which code and when.  
+- If scans fail, verify the format matches your scanners.  
+- Reprint from history if the label is damaged or replaced.
 
-**To generate labels in bulk:**
+### Field Play: Stand Up a New Zone
 
-1. Go to "Batch Labels"
-2. Select multiple locations:
-   - Individually pick them from a list
-   - Select all locations in a zone
-   - Use search results and "select all"
-3. Choose your template
-4. Set printer and material
-5. Set copies per location (usually 1)
-6. Preview (optional but recommended)
-7. Confirm and print
+1. Create 50 bins under the new zone.  
+2. Batch print **Standard Bin** labels.  
+3. Batch generate **Code 128** barcodes.  
+4. Install labels, scan each bin to confirm.  
+5. Capture the batch job summary and attach it to the deployment ticket.
 
-**What happens:**
-The system creates a batch print job. You can track the job status, see how many labels printed successfully, and handle any errors. If 50 labels succeed and 2 fail, you can reprint just the 2 failures.
-
-**Checking batch job status:**
-
-After submitting a batch job, you get a job ID. Use it to:
-- See job status (queued, printing, complete, failed)
-- View how many labels printed
-- Download a summary of what printed
-- Retry failed labels
-
-This is essential for large print jobs. You don't sit at the printer watching—you submit the job and check status later.
-
-**Understanding barcode formats:**
-
-Barcodes encode location information in scannable form. The system supports multiple formats:
-- **Code 128** — High-density, good for alphanumeric codes
-- **Code 39** — Lower density, very widely supported
-- **QR Code** — Can encode a lot of data, good for complex location info
-- **Data Matrix** — Compact 2D barcode, good for small labels
-
-Most warehouses use Code 128 for bins (compact, fast to scan) and QR codes for locations that need more data (customer sites, service vehicles with multiple data points).
-
-**To preview a barcode for a location:**
-
-1. Open the location
-2. Go to "Barcodes"
-3. Choose a format
-4. Preview the barcode
-
-**To generate a barcode:**
-
-1. Preview it (as above)
-2. If it looks good, click "Generate"
-3. The system creates and assigns the barcode to the location
-
-Now when workers scan that barcode, the system recognizes the location immediately.
-
-**To generate barcodes in bulk:**
-
-1. Go to "Batch Barcodes"
-2. Select locations (same as batch labels)
-3. Choose barcode format
-4. Generate
-
-The system creates barcodes for all selected locations. Track the job with the job ID, just like batch labels.
-
-**Viewing barcode history:**
-
-Open a location and view barcode history to see:
-- When barcodes were generated
-- What format was used
-- Who generated them
-- If they were replaced (old barcode vs. new barcode)
-
-This is useful when troubleshooting scanning issues. If someone says "this barcode doesn't work," check history to see if it's been replaced or if there are multiple barcodes (which causes confusion).
-
-**Real-world workflow:**
-
-You're setting up a new zone with 50 bins:
-1. Create all 50 bin locations (see "Adding Your First Location")
-2. Go to Batch Labels, select all 50 bins, choose "Standard Bin Label" template, preview, print
-3. Go to Batch Barcodes, select the same 50 bins, choose "Code 128" format, generate
-4. Workers label the physical bins with the printed labels (which include the barcodes)
-5. Scan each bin once to verify it works
-6. Bins are ready for use
-
-Total time: Maybe 30 minutes for 50 bins. Without batch operations, it would take hours.
+Total time ~30 minutes versus hours manually.
 
 ---
 
@@ -562,107 +604,57 @@ Total time: Maybe 30 minutes for 50 bins. Without batch operations, it would tak
 
 Locations often work together. Relationships tell the system how they coordinate and automate flows between them.
 
-**Understanding relationship types:**
+| Relationship | What it Connects | Trigger | Automation Outcome |
+| --- | --- | --- | --- |
+| Replenishment | Pick bin → bulk storage | Bin below threshold | Auto transfer tasks keep pick face stocked |
+| Overflow | Primary zone → backup zone | Utilization above threshold | Redirects inbound loads, backfills later |
+| Cross-Dock | Receiving → Shipping | Incoming tagged as cross-dock | Skips put-away, creates immediate outbound tasks |
+| Adjacency | Neighboring bins/zones | Path planning | Optimizes walk sequences for picks/put-away |
+| Hazard Buffer | Incompatible storage areas | Hazard rules | Prevents unsafe adjacency, raises alerts |
 
-**Replenishment** — Links a pick location (where workers grab items) to bulk storage (where backup stock lives). When the pick location runs low, the system knows where to get more and can automatically create transfer tasks.
+#### Replenishment in Action
 
-**Overflow** — Links a main location to a backup. When the main location hits a capacity threshold, the system automatically starts directing incoming goods to the overflow. When space opens in the main, it helps move items back.
+1. Open pick bin (`PICK-A12`) → **Relationships** → **Add**.  
+2. Select **Replenishment** and choose bulk location (`BULK-RACK-5`).  
+3. Direction = source → target. Priority = 1.  
+4. Rules: Trigger below 20%, fill to 80%, allow partial, no approval.  
+5. Automation = Enabled.  
+6. Confirm.
 
-**Cross-Dock** — Links receiving to shipping for items that barely stop. Products arriving for immediate shipment go through cross-dock locations optimized for quick transfer, not long-term storage.
+Now when `PICK-A12` drops under 20%, a transfer task fires automatically and the bin refills to 80%. You focus on coaching, not micromanaging bin levels.
 
-**Adjacency** — Marks locations that are physically next to each other. Useful for planning pick paths and understanding physical layout.
+<details>
+<summary>Overflow Safety Net</summary>
 
-**Hazard Buffer** — Enforces separation between locations storing incompatible materials. You can't store flammables next to oxidizers, and the hazard buffer relationship prevents it.
+1. Open `Receiving Zone A` → **Relationships** → **Add**.  
+2. Choose **Overflow** and target `Receiving Zone B`.  
+3. Threshold = 85%, release when back below 60%.  
+4. Enable mirror-backfill so overflow drains automatically when space returns.
 
-**To view relationships for a location:**
+</details>
 
-1. Open the location
-2. Go to "Relationships"
-3. See all relationships where this location is involved (as source or target)
+::: danger Hazard Buffers Save Lives
+Link flammables and oxidizers with a Hazard Buffer. If someone tries to move incompatible pallets together, the system blocks the transfer and raises an alert. Document the reason so audits see the control in action.
+:::
 
-Optionally filter by relationship type or direction to focus on specific connections.
+### Quick Confidence Check
 
-**To create a replenishment relationship:**
+<LearningQuiz
+  question="Your pick bins keep running dry overnight. Which relationship solves it long term?"
+  :options="[
+    'Replenishment from the bulk rack with an automated trigger',
+    'Hazard buffer between the bins and the bulk rack',
+    'Cross-dock between receiving and the pick bins'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Automated replenishment keeps the pick face healthy.',
+    'Hazard buffers control safety spacing, not restock flow.',
+    'Cross-dock skips put-away; it doesn’t restock pick bins.'
+  ]"
+/>
 
-This is the most common relationship type, so let's walk through it in detail.
-
-1. Open the pick location (e.g., "Pick Bin A-12")
-2. Go to "Relationships"
-3. Click "Add Relationship"
-4. Choose **Replenishment** as the type
-5. Select the bulk storage location (e.g., "Bulk Storage Pallet Rack 5")
-6. Set direction to **source to target** (bulk storage is the source, pick bin is the target)
-7. Set priority (if multiple bulk locations feed this pick bin, lower number = higher priority)
-8. Configure rules:
-   - **Trigger below** — Replenish when pick bin drops below 20%
-   - **Replenish to** — Fill it back up to 80%
-   - **Max transfer per day** — Limit to prevent overloading (optional)
-   - **Approval required** — Yes/no (usually no for routine replenishment)
-   - **Allow partial** — Yes (don't wait for full replenishment if bulk storage is low)
-9. Set automation:
-   - **Enabled** — Yes (automatic transfer tasks) or No (manual only)
-   - **Audit required** — Yes/no (record every replenishment event)
-10. Confirm
-
-**What happens:**
-When Pick Bin A-12 drops to 20% capacity, the system automatically triggers a replenishment. If automation is enabled, it creates a transfer task: move items from Bulk Storage Pallet Rack 5 to Pick Bin A-12 until A-12 reaches 80%. Workers see the task, execute it, inventory moves, and the pick bin is restocked.
-
-**Why this is powerful:**
-You don't manually monitor every pick bin. The system watches them and triggers replenishment automatically. Pickers always have stock to pick from. You configure the rule once and it works forever (or until you change it).
-
-**To create an overflow relationship:**
-
-1. Open the main location (e.g., "Receiving Zone A")
-2. Go to "Relationships"
-3. Click "Add Relationship"
-4. Choose **Overflow** as the type
-5. Select the overflow location (e.g., "Overflow Zone C")
-6. Set direction (usually source to target—main is source, overflow is target)
-7. Configure rules:
-   - **Trigger below** — When main hits 75% capacity, activate overflow
-   - **Replenish to** — When main drops back to 60%, move items back from overflow
-8. Set automation (enabled/disabled)
-9. Confirm
-
-**What happens:**
-When Receiving Zone A hits 75% capacity, new incoming shipments automatically route to Overflow Zone C instead. When Zone A clears back to 60%, the system helps move items back from overflow to main. This prevents bottlenecks during surge periods.
-
-**Viewing relationship graphs:**
-
-For complex locations with many relationships, view the relationship graph. It shows a visual diagram: this location connects to these other locations via these relationship types. This is invaluable for understanding flow patterns and spotting problems.
-
-**Example:** You have a product that's always out of stock in pick bins. View the relationship graph for those pick bins and discover they're not connected to bulk storage—there's no replenishment relationship. That's why they're not getting restocked automatically.
-
-**To update a relationship:**
-
-1. Open the location
-2. Go to "Relationships"
-3. Find the relationship you want to change
-4. Click "Edit"
-5. Update rules, schedules, or automation settings
-6. Confirm
-
-Changes take effect immediately. If you raise the replenishment trigger from 20% to 30%, the system starts replenishing earlier.
-
-**To delete a relationship:**
-
-1. Open the location
-2. Go to "Relationships"
-3. Find the relationship to remove
-4. Click "Delete"
-5. Confirm
-
-The relationship is removed. Automation stops, but existing inventory and history remain unchanged.
-
-**Relationship schedules:**
-
-Some relationships should only work at certain times:
-
-**Real-time mode** — Active 24/7, triggers whenever conditions are met
-**Scheduled mode** — Only active during defined windows (e.g., replenish pick bins every morning at 6 AM)
-**Manual mode** — Never triggers automatically, requires manual execution
-
-Configure the schedule when creating or editing the relationship. Set a cron expression for precise timing or use simple schedules like "daily at 6 AM" or "every 4 hours."
+> **Pro tip:** Use the relationship matrix view to audit all links at once. Look for missing overflow paths or dormant replenishment rules that need a tune-up before peak season.
 
 ---
 
@@ -670,56 +662,54 @@ Configure the schedule when creating or editing the relationship. Set a cron exp
 
 Performance metrics turn locations from static spaces into assets you can optimize.
 
-**To view location performance:**
+### Performance Control Panel
 
-1. Go to "Location Performance" in the main menu
-2. Set your date range — Last week, last month, or a custom range
-3. Select locations to analyze:
-   - Specific location IDs
-   - All locations in a zone
-   - Filter by type (e.g., all bins, all service vehicles)
-4. Choose grouping — By individual location, by zone, or by parent
-5. Optionally include trend data (time-series showing changes over the period)
+| Metric | What It Means | Watch For | Action |
+| --- | --- | --- | --- |
+| Throughput | Movements in/out | Sudden drops or spikes | Check status changes, replenishment rules |
+| Utilization | Average space used | Persistently low (<30%) or maxed (>95%) | Resize, repurpose, or add capacity |
+| Dwell Time | How long stock stays | Rising dwell in fast lanes | Investigate slow sales or blocked picks |
 
-**Key performance metrics:**
+#### Launching Analysis
+1. Open **Location Performance**.  
+2. Pick a date range (last week, last month, custom).  
+3. Choose your scope (specific IDs, entire zone, type filter).  
+4. Group by location, zone, or parent hierarchy.  
+5. Toggle **Trend View** to see time-series patterns.
 
-**Throughput** — How many inventory movements (in and out) occurred in this location during the period. High throughput in staging = healthy (items flow fast). High throughput in long-term storage = investigation needed (why is long-term storage churning?).
+::: tip Compare Like-for-Like
+Select multiple bins from the same zone to spot outliers quickly. A bin with 10× the throughput might have the wrong product or priority.
+:::
 
-**Utilization** — Average capacity used during the period. Shows whether the location is earning its keep. Consistently low utilization (20-30%) suggests the space is wasted or oversized. Consistently maxed utilization (95%+) suggests you need more space or better flow management.
+### Spotlight Scenarios
 
-**Dwell time** — Average time items stay in the location before moving. Short dwell in staging = good. Long dwell in pick bins = items aren't selling. Increasing dwell time = slowing sales or overstocking. Decreasing dwell time in quarantine = faster inspections.
+- **Throughput slump:** Zone B drops 20%. The dashboard shows bins marked “Pick Only”—re-enable replenishment, throughput rebounds.  
+- **Dwell spike:** Pick Bin C-15 climbs from 3 → 7 days. Alert sales, reduce forward stock, shift the slot to a faster mover.  
+- **Fleet imbalance:** Service Vehicle 5 runs at 98% while Vehicle 7 cruises at 40%. Reassign technicians or inventory to balance load.
 
-**Understanding trends:**
+<details>
+<summary>Export + Share</summary>
 
-Performance isn't just a snapshot—it's patterns over time. The system can show:
-- **Throughput trending up** — Location is getting busier
-- **Utilization creeping higher** — Location is filling up gradually
-- **Dwell time increasing** — Items are sitting longer
+Use the export button for executive decks, BI mashups, or year-over-year comparisons. Include trend charts in your ops review to show where proactive actions paid off.
 
-These trends predict future problems. If utilization climbs 2% per week, you know you'll hit capacity in 10 weeks. Plan now instead of reacting in crisis mode.
+</details>
 
-**Comparing locations:**
+### Quick Confidence Check
 
-When you select multiple locations, the system compares them side-by-side. This reveals:
-- Which bins are most productive (high throughput, good utilization, short dwell)
-- Which bins are underperforming (low throughput, wasted space, long dwell)
-- Outliers that need investigation (one bin has 10x the throughput of similar bins—why?)
-
-**Using performance data for decisions:**
-
-**Example 1:** Zone B's throughput dropped 20% last week. Investigation shows several bins were incorrectly marked "pick-only" after a reorganization, preventing replenishment. Fix the status, throughput returns to normal.
-
-**Example 2:** Pick Bin C-15 has dwell time climbing from 3 days to 7 days. The product stored there is slowing down. Alert sales, consider reducing stock levels, or reallocate the bin to a faster-moving product.
-
-**Example 3:** Service Vehicle 5 consistently runs at 95-98% capacity while Vehicle 7 runs at 40%. Rebalance technician assignments or inventory allocation to even out the load.
-
-**Exporting performance data:**
-
-You can export performance metrics for deeper analysis in spreadsheets or BI tools. This is useful for:
-- Executive reporting
-- Detailed variance analysis
-- Correlation with sales or operational data
-- Long-term trend analysis (year-over-year comparisons)
+<LearningQuiz
+  question="Dwell time is climbing in your staging zone. What is the first question to ask?"
+  :options="[
+    'Are outbound shipments or put-away tasks backing up?',
+    'Should we delete the zone to reset the metric?',
+    'Can we ignore it because dwell doesn’t matter?'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Backlog in downstream processes usually drives dwell spikes.',
+    'Deleting destroys history and causes chaos.',
+    'Dwell is a leading indicator—you should never ignore it.'
+  ]"
+/>
 
 ---
 
@@ -727,108 +717,67 @@ You can export performance metrics for deeper analysis in spreadsheets or BI too
 
 When you need to find or change many locations at once, advanced search and mass operations save enormous time.
 
-**Advanced location search:**
+### Advanced Search Builder
 
-1. Go to "Location Search"
-2. Build your query with filters:
-   - **Status** — Active, inactive, frozen, quarantine, archived
-   - **Type** — Warehouse, zone, bin, vehicle, customer site, virtual, mobile, drop ship, quarantine
-   - **Parent** — All locations under a specific parent
-   - **Capacity utilization** — Min and max percentages (e.g., 70-90% full)
-   - **Zones** — Specific zone identifiers if your organization uses zone tags
-3. Execute search
-4. See results with key details (name, code, type, status, capacity)
+1. Open **Location Search**.  
+2. Add filters:
+   - **Status** (Active, Frozen, etc.)  
+   - **Type** (Bin, Zone, Vehicle…)  
+   - **Parent** (focus on a zone hierarchy)  
+   - **Utilization range** (e.g., 70–90%)  
+   - **Tags/Zones** if your org tracks them  
+3. Run the search and review the results grid with live utilization, alerts, and relationship indicators.
 
-**Search is the foundation for mass operations.** Find the locations you want to change, then apply mass updates to all of them at once.
+Search is the staging ground for every mass update: get the right list first, then take action.
 
-**Mass update preview:**
+### Mass Update Safety Net
 
-Before making any mass change, always preview:
+1. From the search results, click **Mass Update**.  
+2. Confirm the selection (add/remove IDs as needed).  
+3. Choose the update: status, thresholds, attributes, alerts, etc.  
+4. Click **Preview**.
 
-1. Use search to find locations (e.g., "all bins in Cold Storage Zone")
-2. Go to "Mass Update"
-3. Select locations from search results (or manually add IDs)
-4. Choose what to change:
-   - Status (e.g., change from active to receive-only)
-   - Capacity thresholds (e.g., raise warning level from 75% to 80%)
-   - Attributes (e.g., add temperature monitoring to all)
-5. Click "Preview"
+Preview shows:
+- The exact locations impacted.  
+- Old vs new values.  
+- Inventory affected.  
+- Warnings (e.g., cannot change because of pending transactions).
 
-**What preview shows:**
-- Exactly which locations will change
-- What the old values are and what the new values will be
-- How many inventory units are affected
-- Any conflicts or warnings (e.g., can't change a location with pending transactions)
+Only after the preview looks right do you **Execute**. The system creates a job so you can track progress.
 
-Preview is your safety net. It shows consequences before you commit. If preview says "147 locations will change, 2,830 inventory units affected," you know the impact.
+::: tip Track the Job
+- Use the job detail page to watch completion, errors, retries.  
+- Export the change log for audit records.  
+- Re-run the job if any records fail—only the failures reprocess.
+:::
 
-**Executing mass updates:**
+<details>
+<summary>Mass Update Lab</summary>
 
-1. Review the preview carefully
-2. If it looks correct, click "Execute"
-3. The system creates a mass update job
-4. Track the job with the job ID
+1. Search for all **Cold Storage** bins.  
+2. Mass update warning thresholds from 75% → 70%.  
+3. Preview: confirm 42 locations, note utilization impact.  
+4. Execute, then open job history to download the change report.  
+5. Attach the report to your facilities ticket for compliance.
 
-**Tracking mass update jobs:**
+</details>
 
-1. Go to "Mass Update Jobs"
-2. Find your job by ID or date
-3. See status:
-   - **Queued** — Waiting to start
-   - **In Progress** — Actively updating locations
-   - **Complete** — Finished successfully
-   - **Partial** — Some succeeded, some failed
-   - **Failed** — Update didn't work
+### Quick Confidence Check
 
-For partial or failed jobs, see which locations succeeded and which failed. You can retry failures individually or investigate why they failed.
-
-**Undoing mass updates:**
-
-If a mass update was a mistake, you can undo it:
-
-1. Go to "Mass Update Jobs"
-2. Find the job you want to undo
-3. Click "Undo"
-4. Confirm
-
-The system reverts all changes made by that job. Locations return to their previous state. This is a lifesaver when you accidentally update the wrong locations or realize the change broke something.
-
-**Important:** Undo only works if you haven't made other changes to those locations in the meantime. If you mass update 50 locations, then manually edit 5 of them, undo will only revert the 45 you didn't touch.
-
-**Real-world mass operation workflows:**
-
-**Scenario 1: Seasonal cold storage activation**
-It's November. You need to activate 80 cold storage bins for winter products.
-1. Search: "all bins in Cold Storage Zone, status=inactive"
-2. Mass update: Change status to active, set capacity thresholds (60/80/90)
-3. Preview: Verify all 80 bins
-4. Execute
-5. Done in 5 minutes instead of 80 individual updates
-
-**Scenario 2: Temperature monitoring compliance**
-New regulations require temperature monitoring on all cold storage. You have 120 cold storage locations.
-1. Search: "all locations, type=bin or zone, attributes include temperature-controlled"
-2. Mass update: Add "temperature monitoring enabled" attribute
-3. Preview: Confirm 120 locations
-4. Execute
-5. All locations now compliant
-
-**Scenario 3: Capacity threshold adjustment**
-After 3 months, you realize your receiving zone thresholds are too conservative. Alerts trigger constantly but never become problems.
-1. Search: "all bins in Receiving Zone"
-2. Mass update: Change warning threshold from 75% to 85%
-3. Preview: See 45 bins affected
-4. Execute
-5. Alerts drop by 60%, only trigger when actually needed
-
-**Scenario 4: Accidental mass update**
-You meant to update bins in Zone A but accidentally selected Zone B.
-1. Realize the mistake immediately
-2. Go to Mass Update Jobs
-3. Find the job (it just ran 2 minutes ago)
-4. Click "Undo"
-5. Zone B returns to original state
-6. Run the correct update on Zone A
+<LearningQuiz
+  question="Why is the preview step non-negotiable before executing a mass update?"
+  :options="[
+    'It shows the exact impact and catches conflicts before you commit',
+    'It slows you down so you feel more careful',
+    'It is optional because undo is automatic'
+  ]"
+  :answer-index="0"
+  :explanations="[
+    'Preview is your audit trail and safety harness.',
+    'Speed without accuracy creates bigger problems.',
+    'There is no global undo—preview prevents mistakes.'
+  ]"
+/>
 
 ---
 
