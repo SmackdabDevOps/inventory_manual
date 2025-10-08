@@ -21,6 +21,108 @@ Think of the difference between a paper map and GPS. The paper map shows roads; 
 
 ---
 
+::: info
+**Before You Start**
+- Review your master location naming convention so search, RF devices, and analytics stay aligned.
+- Gather the operational facts: temperature requirements, hazardous materials flags, max pallet heights, and ownership rules.
+- Confirm who approves new locations (ops lead, facilities, compliance) so the creation workflow does not stall partway through.
+:::
+
+::: danger
+**Common Pitfalls**
+- Copying an existing bin type without checking inherited rules (e.g., quarantine, temperature) leads to surprise blocking later.
+- Leaving utilization thresholds at defaults can swamp staging areas during seasonal spikes.
+- Forgetting to document why a location was created makes future audits painful—capture the business trigger in the notes right away.
+:::
+
+## Scenario: Expansion Week in Receiving
+
+> Goal: Open a new receiving zone, shift overflow inventory, and keep auditors happy during the busiest week of the quarter.
+
+**Monday 08:00 — Facilities Walkthrough**
+- Floor lead tours an empty corner of the warehouse slated for expansion.
+- Notes special requirements: cold chain pallets, temporary contractor staging, and lift-clearance limits near sprinkler lines.
+
+**Monday 09:30 — Location Design Workshop**
+- In Smackdab > Locations, clone an existing refrigerated zone but adjust capacity to 65 pallet positions.
+- Add child bins for “Dock A – Cold Hold” and “Dock A – QA Review” with quarantine rules enabled.
+
+**Monday 11:00 — Approval + API Sync**
+- Ops lead approves the new zone; platform engineer calls the Locations API to push the structure to downstream integrations.
+- Warehouse automation tooling is notified through the event feed (`inventory.location.created`), so pick/put-away algorithms start considering the new zone.
+
+**Monday 14:00 — Controlled Go-Live**
+- Team freezes the old overflow zone, activates the new bins, and re-routes inbound ASN appointments.
+- Capacity dashboard shows the new zone trending at only 20% utilization while legacy receiving burns down to 60% by end of day.
+
+**Tuesday 07:30 — Audit Check-In**
+- Compliance officer views the timeline of freeze/unfreeze events plus audit notes captured in the location history—no manual spreadsheet required.
+
+## Location Type Cheat Sheet
+
+| Type | Ideal For | Key Rules | Watch Outs |
+| --- | --- | --- | --- |
+| Warehouse / Store | Top-level facilities | Holds child zones, tracks SLA targets | Cannot sit inside another location |
+| Zone | Functional areas (Receiving, QA, Staging) | Inherits/propagates rules to children | Wrong type breaks bin hierarchy |
+| Bin | Final storage positions | Tracks capacity, cycle counts, inventory states | Set correct UOM and dimensions |
+| Quarantine | Holds pending inspections | Blocks picking/put-away until cleared | Requires reason + release workflow |
+| Service Vehicle | Technician vans, mobile inventory | Enforces technician assignment, weight limits | Use alerts to restock before routes |
+| Customer Site | Consignment/VMI locations | Links to customer account and billing cadence | Needs reconciliation schedule |
+| Virtual | In transit, pending receipt | Keeps inventory visible without a physical slot | Do not leave inventory stranded here |
+
+## API Blueprint: Create a Location Programmatically
+
+When automations or external systems need to seed a new location, call the contract-first API. The example below mirrors the scenario above and can be pasted into your sandbox runner.
+
+```http
+POST /operations/locations/v1/locations
+Content-Type: application/json
+
+{
+  "code": "REC-A-COLD",
+  "name": "Receiving Zone A - Cold",
+  "type": "ZONE",
+  "parentCode": "WH-MAIN",
+  "capacity": {
+    "unit": "PALLET",
+    "max": 65
+  },
+  "rules": {
+    "temperatureRangeCelsius": { "min": 0, "max": 4 },
+    "quarantineRequired": true,
+    "receiving": { "dockDoor": "A", "asnOnly": true }
+  },
+  "notes": "Expanded cold receiving capacity for Q4 peak. Audit ref: FAC-2025-11."
+}
+```
+
+```bash
+curl -X POST https://api.smackdab.app/operations/locations/v1/locations \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d @payload.json
+```
+
+The response returns the location ID plus derived metadata (hierarchy path, utilization thresholds) so you can sync downstream systems.
+
+## Practice Lab: Map Your Own Facility
+
+<details>
+<summary>Launch the guided lab</summary>
+
+1. Open the sandbox environment and duplicate the “Main DC” warehouse.
+2. Add a new **Zone** named “Lab Staging” with capacity of `20` pallets and a utilization warning at `70%`.
+3. Create two **Bins** under the zone:
+   - `LAB-STAGE-01` (standard, 110" height clearance)
+   - `LAB-HAZ-01` (quarantine enabled, requires hazmat certification)
+4. Freeze `LAB-HAZ-01`, add a note explaining the mock inspection, and set auto-unfreeze in 2 hours.
+5. Use the **Inventory Rollup** tool to confirm the zone reports `0` capacity usage but shows the freeze reason in the hierarchy.
+6. Capture a screenshot of the rollup and attach it to your runbook—this becomes your “done” proof.
+
+Try variations: convert `LAB-STAGE-01` into a service vehicle, or simulate a transfer to test how alerts behave.
+
+</details>
+
 ## Getting Started: Adding Your First Location
 
 Let's start with the basics: creating a new location.
