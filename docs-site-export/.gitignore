@@ -1,0 +1,6 @@
+# Node
+node_modules
+
+# Local caches
+.vitepress/cache
+.DS_Store

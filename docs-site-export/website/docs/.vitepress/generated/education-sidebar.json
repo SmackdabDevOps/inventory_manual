@@ -1,0 +1,137 @@
+{
+  "text": "Education",
+  "items": [
+    {
+      "text": "Overview",
+      "link": "/education/"
+    },
+    {
+      "text": "Chapter 1: Understanding Inventory Locations",
+      "link": "/education/understanding-inventory-locations"
+    },
+    {
+      "text": "Chapter 2: Allocations and Serial Handling",
+      "link": "/education/allocations-and-serial-handling"
+    },
+    {
+      "text": "Chapter 3: Units of Measure (UOM)",
+      "link": "/education/units-of-measure"
+    },
+    {
+      "text": "Chapter 4: Transactions Overview",
+      "link": "/education/transactions-overview"
+    },
+    {
+      "text": "Chapter 5: Receiving Inventory",
+      "link": "/education/receiving-inventory"
+    },
+    {
+      "text": "Chapter 6: Adjustments - Fixing Inventory Counts",
+      "link": "/education/adjustments-fixing-inventory-counts"
+    },
+    {
+      "text": "Chapter 7: Transfers Between Locations",
+      "link": "/education/transfers-between-locations"
+    },
+    {
+      "text": "Chapter 8: Shipping and Deliveries",
+      "link": "/education/shipping-and-deliveries"
+    },
+    {
+      "text": "Chapter 9: Returns (RMA)",
+      "link": "/education/returns-rma"
+    },
+    {
+      "text": "Chapter 10: Allocations - Reserving Inventory",
+      "link": "/education/allocations-reserving-inventory"
+    },
+    {
+      "text": "Chapter 11: Pick Lists and Picking",
+      "link": "/education/pick-lists-and-picking"
+    },
+    {
+      "text": "Chapter 12: Backorders - Managing Shortages",
+      "link": "/education/backorders-managing-shortages"
+    },
+    {
+      "text": "Chapter 13: Supplier Management",
+      "link": "/education/supplier-management"
+    },
+    {
+      "text": "Chapter 14: Purchase Orders",
+      "link": "/education/purchase-orders"
+    },
+    {
+      "text": "Chapter 15: Procurement Command Center",
+      "link": "/education/procurement-command-center"
+    },
+    {
+      "text": "Chapter 16: Replenishment",
+      "link": "/education/replenishment"
+    },
+    {
+      "text": "Chapter 17: Serial Number Tracking",
+      "link": "/education/serial-number-tracking"
+    },
+    {
+      "text": "Chapter 18: Lot and Batch Tracking",
+      "link": "/education/lot-and-batch-tracking"
+    },
+    {
+      "text": "Chapter 19: Cycle Counting and Physical Inventory",
+      "link": "/education/cycle-counting-and-physical-inventory"
+    },
+    {
+      "text": "Chapter 20: Kitting and Assembly",
+      "link": "/education/kitting-and-assembly"
+    },
+    {
+      "text": "Chapter 21: Transformations",
+      "link": "/education/transformations"
+    },
+    {
+      "text": "Chapter 22: Analytics and Business Intelligence",
+      "link": "/education/analytics-and-business-intelligence"
+    },
+    {
+      "text": "Chapter 23: Reporting and KPIs",
+      "link": "/education/reporting-and-kpis"
+    },
+    {
+      "text": "Chapter 24: Dashboards and Visualization",
+      "link": "/education/dashboards-and-visualization"
+    },
+    {
+      "text": "Chapter 25: Service Management",
+      "link": "/education/service-management"
+    },
+    {
+      "text": "Chapter 26: Inventory Valuation",
+      "link": "/education/inventory-valuation"
+    },
+    {
+      "text": "Chapter 27: Period Closing",
+      "link": "/education/period-closing"
+    },
+    {
+      "text": "Chapter 28: API Integration",
+      "link": "/education/api-integration"
+    },
+    {
+      "text": "Chapter 29: Workflow Automation",
+      "link": "/education/workflow-automation"
+    },
+    {
+      "text": "Chapter 30: Data Synchronization",
+      "link": "/education/data-synchronization"
+    },
+    {
+      "text": "Chapter 31: Performance Optimization and Scaling",
+      "link": "/education/performance-optimization-and-scaling"
+    },
+    {
+      "text": "Chapter 32: Security and Compliance",
+      "link": "/education/security-and-compliance"
+    }
+  ]
+}

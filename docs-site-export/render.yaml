@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: smackdab-inventory-manual
+    env: static
+    buildCommand: npm install --prefix website && npm run --prefix website sync && npm run --prefix website build
+    staticPublishPath: website/docs/.vitepress/dist
+    envVars:
+      - key: VITE_GA_ID
+        value: ''
+      - key: VITE_PLAUSIBLE_DOMAIN
+        value: ''
+    routes:
+      - type: rewrite
+        source: /(.*)
+        destination: /$1

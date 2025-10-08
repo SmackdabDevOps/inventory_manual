@@ -1,0 +1,23 @@
+:root {
+  --vp-c-brand-1: #2563eb;
+  --vp-c-brand-2: #1d4ed8;
+  --vp-c-brand-3: #1e40af;
+}
+
+/* Keep copy buttons visible */
+.vp-doc .vp-code-group .copy,.vp-doc [class*="language-"] .copy{
+  opacity: 1 !important;
+}
+
+/* Custom copy button for non-shiki blocks (fallback) */
+pre > button.copy-btn{
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  background: var(--vp-c-brand-1);
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}

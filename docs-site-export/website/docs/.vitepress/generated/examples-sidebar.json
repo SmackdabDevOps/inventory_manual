@@ -1,0 +1,101 @@
+{
+  "text": "Examples",
+  "items": [
+    {
+      "text": "Overview",
+      "link": "/examples/"
+    },
+    {
+      "text": "1. What This Service Does",
+      "link": "/examples/01-what-this-service-does"
+    },
+    {
+      "text": "2. Getting Started",
+      "link": "/examples/02-getting-started"
+    },
+    {
+      "text": "3. What You Can Do",
+      "link": "/examples/03-what-you-can-do"
+    },
+    {
+      "text": "4. How To: Set Up",
+      "link": "/examples/04-how-to-set-up"
+    },
+    {
+      "text": "5. How To: Find and Understand Your Stock",
+      "link": "/examples/05-how-to-find-and-understand-your-stock"
+    },
+    {
+      "text": "6. How To: Promise and Plan",
+      "link": "/examples/06-how-to-promise-and-plan"
+    },
+    {
+      "text": "7. How To: Move and Fulfill",
+      "link": "/examples/07-how-to-move-and-fulfill"
+    },
+    {
+      "text": "8. How To: Receive and Put Away",
+      "link": "/examples/08-how-to-receive-and-put-away"
+    },
+    {
+      "text": "9. How To: Count and Reconcile",
+      "link": "/examples/09-how-to-count-and-reconcile"
+    },
+    {
+      "text": "10. How To: Fix Problems",
+      "link": "/examples/10-how-to-fix-problems"
+    },
+    {
+      "text": "11. How To: Track Serials and Lots",
+      "link": "/examples/11-how-to-track-serials-and-lots"
+    },
+    {
+      "text": "12. How To: Build and Manage Kits",
+      "link": "/examples/12-how-to-build-and-manage-kits"
+    },
+    {
+      "text": "13. How To: Manage Inventory at Customer Sites",
+      "link": "/examples/13-how-to-manage-inventory-at-customer-sites"
+    },
+    {
+      "text": "14. How To: Plan and Replenish",
+      "link": "/examples/14-how-to-plan-and-replenish"
+    },
+    {
+      "text": "15. How To: Work with Suppliers",
+      "link": "/examples/15-how-to-work-with-suppliers"
+    },
+    {
+      "text": "16. How To: Field Service Usage",
+      "link": "/examples/16-how-to-field-service-usage"
+    },
+    {
+      "text": "17. How To: Value and Close",
+      "link": "/examples/17-how-to-value-and-close"
+    },
+    {
+      "text": "18. How To: Analyze and Report",
+      "link": "/examples/18-how-to-analyze-and-report"
+    },
+    {
+      "text": "19. How To: Labels and Barcodes",
+      "link": "/examples/19-how-to-labels-and-barcodes"
+    },
+    {
+      "text": "20. How To: Imports, Exports, and Views",
+      "link": "/examples/20-how-to-imports-exports-and-views"
+    },
+    {
+      "text": "21. How To: Approvals and Changes",
+      "link": "/examples/21-how-to-approvals-and-changes"
+    },
+    {
+      "text": "22. System Alerts & Automations",
+      "link": "/examples/22-system-alerts-automations"
+    },
+    {
+      "text": "23. Common Questions",
+      "link": "/examples/23-common-questions"
+    }
+  ]
+}

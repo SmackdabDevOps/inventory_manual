@@ -1,0 +1,17 @@
+{
+  "name": "smackdab-inventory-manual",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs --open",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs --port 5174",
+    "sync": "node ./scripts/sync-manual.js && echo 'Sync done'",
+    "examples:generate": "node ./scripts/generate-examples-from-toc.js && echo 'Examples generated'",
+    "export:repo": "node ../scripts/export-docs-repo.js && echo 'Export created at docs-site-export/'"
+  },
+  "devDependencies": {
+    "vitepress": "^1.3.4"
+  }
+}
