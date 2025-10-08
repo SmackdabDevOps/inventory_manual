@@ -107,8 +107,7 @@ The response returns the location ID plus derived metadata (hierarchy path, util
 
 ## Practice Lab: Map Your Own Facility
 
-<details>
-<summary>Launch the guided lab</summary>
+#### Launch the guided lab
 
 1. Open the sandbox environment and duplicate the “Main DC” warehouse.
 2. Add a new **Zone** named “Lab Staging” with capacity of `20` pallets and a utilization warning at `70%`.
@@ -120,8 +119,6 @@ The response returns the location ID plus derived metadata (hierarchy path, util
 6. Capture a screenshot of the rollup and attach it to your runbook—this becomes your “done” proof.
 
 Try variations: convert `LAB-STAGE-01` into a service vehicle, or simulate a transfer to test how alerts behave.
-
-</details>
 
 ## Getting Started: Adding Your First Location
 
@@ -225,15 +222,12 @@ Breadcrumbs at the top of each location (for example, `Main Warehouse > Receivin
 3. Use the compatibility preview—temperature, ownership, hazard rules must align.  
 4. Confirm. The system prevents circular references or unsafe moves automatically.
 
-<details>
-<summary>Hands-on: Rehome a Bin Safely</summary>
+#### Hands-on: Rehome a Bin Safely
 
 1. In sandbox, open `BIN-STAGE-05`.  
 2. Attempt to move it into `Dry Storage Zone`—note the cooling rule mismatch warning.  
 3. Cancel and instead select `Cold Storage Zone` where the rule matches.  
 4. Confirm the move, then open the zone to ensure the bin now inherits the cold-storage automation.
-
-</details>
 
 ### Quick Confidence Check
 
@@ -273,15 +267,12 @@ The search box accepts natural phrases (`"frozen storage less than 50% full"`) a
 - Combine them: *Active + Type=Bin + Parent=Receiving + Utilization > 80%* → the bins you must fix first.
 :::
 
-<details>
-<summary>Try It: Build a “Hot Spots” view</summary>
+#### Try It: Build a “Hot Spots” View
 
 1. Open Locations → Search, type `zone utilization > 80`.  
 2. Add filters: **Type = Zone**, **Status = Active**.  
 3. Sort by utilization descending and bookmark the results.  
 4. During stand-up, pull this view to discuss load balancing plans.
-
-</details>
 
 ### Quick Confidence Check
 
@@ -327,16 +318,13 @@ If the item is serialized or lot-controlled, expand the row to view full traceab
 | Units in different measures | Group by **UOM** | See pallets + cases + eaches simultaneously |
 | Yesterday vs Today | Set the **As Of** timestamp | Investigate deltas, build audit trail |
 
-<details>
-<summary>Lab: Find the missing 20 units</summary>
+#### Lab: Find the Missing 20 Units
 
 1. Take note of current quantity in `Zone - Staging`.  
 2. Switch **As Of** to yesterday 08:00.  
 3. Compare: yesterday shows 120 units, today 100 units.  
 4. Click the 20 unit delta to open the transaction list—spot the transfer that occurred overnight.  
 5. Add a note in the investigation log linking to that transfer.
-
-</details>
 
 ### Quick Confidence Check
 
@@ -389,15 +377,12 @@ Capacity is more than "full" or "empty." Think of it as a heartbeat you monitor 
 - **Rate of change > 4% per day?** Trigger proactive transfers before the rush.  
 - **Projection shows critical within 48 hours?** Alert shift leads and reprioritize pick/put-away tasks.
 
-<details>
-<summary>Simulation: Stay ahead of a surge</summary>
+#### Simulation: Stay Ahead of a Surge
 
 1. On Tuesday 09:00, Receiving shows 70% utilization with +5% daily trend.  
 2. Projection says 92% by Thursday 14:00.  
 3. Enable overflow to Zone B and schedule extra outbound picks Wednesday morning.  
 4. Re-run projection; if critical moves beyond 72 hours, your plan worked.
-
-</details>
 
 ### Quick Confidence Check
 
@@ -439,8 +424,7 @@ Sometimes you need to pause a location temporarily—cycle counts, inspections, 
 Avoid sticky freezes by always setting an expiration (“Unfreeze at 17:00” or “Freeze for 4 hours”). The system restores the previous status automatically.
 :::
 
-<details>
-<summary>API Quick Hit</summary>
+#### API Quick Hit
 
 ```http
 POST /operations/locations/v1/locations/{locationId}/freeze
@@ -456,8 +440,6 @@ POST /operations/locations/v1/locations/{locationId}/unfreeze
   "note": "Count complete, variances recorded"
 }
 ```
-
-</details>
 
 ### When to Freeze
 
@@ -572,16 +554,13 @@ Preview templates from the **Labels** tab—what you see is exactly what prints.
 - **QR / Data Matrix** – pack extra data for customer sites or vehicles.
 :::
 
-<details>
-<summary>Generate Barcodes in Bulk</summary>
+#### Generate Barcodes in Bulk
 
 1. Go to **Batch Barcodes**.  
 2. Select the target locations.  
 3. Choose format (Code 128 for bins, QR for sites).  
 4. Generate → track job status.  
 5. Download the summary to hand off to the print room.
-
-</details>
 
 #### Troubleshooting Checklist
 - Use **Barcode History** to see who generated which code and when.  
@@ -623,15 +602,12 @@ Locations often work together. Relationships tell the system how they coordinate
 
 Now when `PICK-A12` drops under 20%, a transfer task fires automatically and the bin refills to 80%. You focus on coaching, not micromanaging bin levels.
 
-<details>
-<summary>Overflow Safety Net</summary>
+#### Overflow Safety Net
 
 1. Open `Receiving Zone A` → **Relationships** → **Add**.  
 2. Choose **Overflow** and target `Receiving Zone B`.  
 3. Threshold = 85%, release when back below 60%.  
 4. Enable mirror-backfill so overflow drains automatically when space returns.
-
-</details>
 
 ::: danger Hazard Buffers Save Lives
 Link flammables and oxidizers with a Hazard Buffer. If someone tries to move incompatible pallets together, the system blocks the transfer and raises an alert. Document the reason so audits see the control in action.
@@ -687,12 +663,9 @@ Select multiple bins from the same zone to spot outliers quickly. A bin with 10�
 - **Dwell spike:** Pick Bin C-15 climbs from 3 → 7 days. Alert sales, reduce forward stock, shift the slot to a faster mover.  
 - **Fleet imbalance:** Service Vehicle 5 runs at 98% while Vehicle 7 cruises at 40%. Reassign technicians or inventory to balance load.
 
-<details>
-<summary>Export + Share</summary>
+#### Export + Share
 
 Use the export button for executive decks, BI mashups, or year-over-year comparisons. Include trend charts in your ops review to show where proactive actions paid off.
-
-</details>
 
 ### Quick Confidence Check
 
@@ -751,16 +724,13 @@ Only after the preview looks right do you **Execute**. The system creates a job 
 - Re-run the job if any records fail—only the failures reprocess.
 :::
 
-<details>
-<summary>Mass Update Lab</summary>
+#### Mass Update Lab
 
 1. Search for all **Cold Storage** bins.  
 2. Mass update warning thresholds from 75% → 70%.  
 3. Preview: confirm 42 locations, note utilization impact.  
 4. Execute, then open job history to download the change report.  
 5. Attach the report to your facilities ticket for compliance.
-
-</details>
 
 ### Quick Confidence Check
 
