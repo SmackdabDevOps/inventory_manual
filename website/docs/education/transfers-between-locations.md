@@ -19,6 +19,52 @@ Understanding how to execute transfers properly—from simple warehouse movement
 
 ---
 
+## Choose the Right Transfer Type
+
+Before you open a transfer form, work through this quick decision path to land on the right workflow.
+
+1. **Is the inventory already inbound from a vendor or another warehouse?**
+   - **Yes:** divert it with a **cross-dock transfer** so it never touches storage.
+   - **No:** continue.
+2. **Is the destination below its calculated reorder point or on a planned replenishment cycle?**
+   - **Yes:** schedule a **replenishment transfer** so demand planners can track the movement.
+   - **No:** continue.
+3. **Is there a customer or production job waiting right now that cannot proceed?**
+   - **Yes:** execute an **emergency move** with elevated approvals and communicate the disruption.
+   - **No:** continue.
+4. **Do you need to rebalance stock between peers (store-to-store, vehicle-to-vehicle)?**
+   - **Yes:** launch a **balancing transfer** and ensure both locations can temporarily spare capacity.
+   - **No:** handle it as a standard **warehouse relocation** (bin-to-bin) instead of a transfer.
+
+> Tip: document the business trigger (forecast, customer demand, asset utilization) inside the transfer notes. Approvers see this context when deciding whether to fast-track the move.
+
+### Ready-to-Ship Checklists
+
+| Transfer type | When it shines | Pre-flight ✅ | Follow-up ⚠️ |
+| --- | --- | --- | --- |
+| Replenishment | Destination is trending below forecast or reorder point. | - Confirm demand signal in the planning dashboard.<br>- Validate source bin has safety stock to spare.<br>- Check approval threshold for the extended value. | - Close the transfer within the same business day.<br>- Update reorder settings if repeated rush transfers occur. |
+| Cross-dock | Inbound goods need to flow straight to staging or delivery. | - Capture the inbound ASN or PO reference.<br>- Align drop-zone capacity at the destination.<br>- Alert receiving so they skip put-away tasks. | - Mark cross-dock pallets as **in transit** until delivery.<br>- Log any break-bulk operations in the notes for traceability. |
+| Emergency move | Critical outage would stop service or production. | - Escalate to the duty manager for rapid approval.<br>- Verify alternate sources so you choose the fastest option.<br>- Communicate downstream commitments that may slip. | - Record the root cause in the variance log.<br>- Schedule a retro transfer if the emergency move is temporary. |
+
+### Practice: Can You Pick the Right Path?
+
+<LearningQuiz
+  question="The downtown store is 12 hours away from a planned replenishment, but a high-value client just walked in for the last available unit. What transfer keeps inventory accurate and the customer order alive?"
+  :options="[
+    'Cross-dock the next inbound shipment so it bypasses storage',
+    'Raise a replenishment transfer from the warehouse as scheduled',
+    'Create an emergency move from the closest peer location'
+  ]"
+  :answer-index="2"
+  :explanations="[
+    'Cross-docking works best when the inventory is already on the truck, which is not true yet.',
+    'Waiting for the planned replenishment risks losing the customer; the timeline is too slow.',
+    'Emergency moves exist for exactly this scenario: demand spike plus customer impact.'
+  ]"
+/>
+
+---
+
 ## Transfer Workflow
 
 The transfer workflow ensures that inventory moves safely and accurately between locations while maintaining proper controls and documentation.
