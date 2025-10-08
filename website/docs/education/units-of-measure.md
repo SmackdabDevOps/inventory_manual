@@ -17,6 +17,15 @@ Think of UOM as the foundation that makes everything else possible. You can't al
 
 UOM transforms your inventory from a collection of vague quantities into a precise, measurable system where every number means exactly what it says, every conversion is mathematically accurate, and every transaction maintains perfect traceability from purchase to sale.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What must stay true when defining alternate units of measure?"
+  :options="[&quot;Conversion ratios need to be exact and auditable&quot;, &quot;Each unit should have a different product SKU&quot;, &quot;Conversions should be estimated each time you transact&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Accurate ratios keep inventory maths correct.&quot;, &quot;SKU proliferation is not required for every unit.&quot;, &quot;Estimating on the fly drives count errors.&quot;]"
+/>
+
 ---
 
 ## Understanding UOM Categories

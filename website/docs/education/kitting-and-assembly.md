@@ -17,6 +17,15 @@ But kitting is more than just packaging—it's about bill of materials managemen
 
 Understanding how to design and manage kitting operations effectively—from kit definition through assembly execution—is essential for businesses that create value through product assembly and customization. This chapter will show you how to master kitting as both an operational capability and a strategic advantage.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What should you verify before releasing a kit build order to the floor?"
+  :options="[&quot;That the components are allocated and the output location has capacity&quot;, &quot;That the kit header has a higher cost than every component&quot;, &quot;That the customer already paid the final invoice&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Allocation and space checks prevent stoppages mid build.&quot;, &quot;Cost comparisons can vary and are not the release gate.&quot;, &quot;Payment status is handled in billing, not on the kit ticket.&quot;]"
+/>
+
 ---
 
 ## Kit Management

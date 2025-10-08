@@ -17,6 +17,15 @@ But inventory counting is more than just comparing numbers—it's about systemat
 
 Understanding how to design and execute counting programs effectively—from cycle counting strategies through full physical inventories—is essential for inventory accuracy and business success. This chapter will show you how to master inventory counting as both an operational necessity and a strategic capability.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What is the key reason to freeze a location before a physical count?"
+  :options="[&quot;To stop ongoing movements so the count reflects a stable snapshot&quot;, &quot;To force the system to recalculate product costs&quot;, &quot;To avoid creating any adjustment records later&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Freezing keeps inventory from changing while the team counts.&quot;, &quot;Cost layers are unrelated to the freeze action.&quot;, &quot;Adjustments may still be required once differences are validated.&quot;]"
+/>
+
 ---
 
 ## Counting Fundamentals

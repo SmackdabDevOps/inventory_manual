@@ -17,6 +17,15 @@ But the command center is more than just a dashboard—it's an intelligent syste
 
 Understanding how to use the procurement command center effectively—from demand management through strategic analysis—is essential for procurement leadership and business success. This chapter will show you how to master the command center as both an operational tool and a strategic capability.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="When a supplier pushes a delivery, what should the command center review first?"
+  :options="[&quot;Which allocations and production orders depend on the slip&quot;, &quot;Whether the supplier portal password expired&quot;, &quot;How many RF scanners are currently online&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;You must understand downstream impact before reacting.&quot;, &quot;Portal access is unrelated to the supply change.&quot;, &quot;Scanner counts do not influence procurement decisions.&quot;]"
+/>
+
 ---
 
 ## Command Center Overview

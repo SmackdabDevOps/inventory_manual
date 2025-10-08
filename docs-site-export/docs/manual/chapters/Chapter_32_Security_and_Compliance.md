@@ -12,6 +12,15 @@ But security and compliance are more than just adding passwords and checkboxes�
 
 Understanding how to implement comprehensive security and compliance effectively—from data encryption through audit management—is essential for business protection and sustainable growth. This chapter will show you how to master security and compliance as both protective capabilities and business enablers.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What is the quickest way to reduce risk when onboarding a new warehouse user?"
+  :options="[&quot;Assign role based permissions aligned to their actual tasks&quot;, &quot;Grant admin access temporarily while training finishes&quot;, &quot;Disable multi factor authentication to speed sign in&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Least privilege keeps sensitive actions locked down.&quot;, &quot;Temporary admin access is a major security gap.&quot;, &quot;MFA is a baseline control that should stay enabled.&quot;]"
+/>
+
 ---
 
 ## Data Protection and Privacy

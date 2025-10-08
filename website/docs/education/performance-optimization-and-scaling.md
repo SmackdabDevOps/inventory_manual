@@ -17,6 +17,15 @@ But performance optimization is more than just making things faster—it involve
 
 Understanding how to optimize and scale inventory management systems effectively—from database queries through infrastructure architecture—is essential for long-term success and growth. This chapter will show you how to master performance optimization and scaling as both technical capabilities and business enablers.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What is the first metric to watch when deciding to scale infrastructure?"
+  :options="[&quot;Transaction latency and queue depth compared to your SLA targets&quot;, &quot;The number of dashboards your analysts built last month&quot;, &quot;How many technicians requested new mobile devices&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Latency and queues show whether the platform meets service goals.&quot;, &quot;Dashboard count does not indicate system strain.&quot;, &quot;Device requests relate to hardware, not platform load.&quot;]"
+/>
+
 ---
 
 ## Database Optimization Strategies

@@ -10,6 +10,15 @@ That's what the Inventory Locations system does. It transforms your physical spa
 
 Think of the difference between a paper map and GPS. The paper map shows roads; GPS knows traffic patterns, suggests better routes, and warns about delays. Your inventory locations work the same way—they're not just addresses, they're spaces that help you make better decisions every day.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why is picking the correct location type so important?"
+  :options="[&quot;The type controls hierarchy, permissions, and operational rules&quot;, &quot;It changes the color of the bin in the mobile app&quot;, &quot;It guarantees the location never needs maintenance again&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Types drive how the system treats the location.&quot;, &quot;Color themes are unrelated to location behavior.&quot;, &quot;Maintenance is still required over time.&quot;]"
+/>
+
 ---
 
 ## Getting Started: Adding Your First Location

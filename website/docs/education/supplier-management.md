@@ -17,6 +17,15 @@ But supplier management is complex, involving evaluation, onboarding, performanc
 
 Understanding how to build and manage an effective supplier network—from initial evaluation through ongoing performance management—is essential for operational excellence and competitive advantage. This chapter will show you how to master supplier management as both an operational necessity and a strategic capability.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What metric best signals a supplier performance issue?"
+  :options="[&quot;Late deliveries against agreed promise dates&quot;, &quot;The number of emails you send the account rep&quot;, &quot;How often the supplier portal UI changes colors&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Delivery reliability is a core supplier KPI.&quot;, &quot;Email volume does not equal risk.&quot;, &quot;Portal themes have no operational impact.&quot;]"
+/>
+
 ---
 
 ## Managing Your Supplier Network

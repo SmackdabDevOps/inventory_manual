@@ -12,6 +12,15 @@ But data synchronization is more than just copying data—it involves conflict r
 
 Understanding how to design and implement data synchronization effectively—from real-time updates through offline scenarios—is essential for modern distributed business systems. This chapter will show you how to master data synchronization as both a technical capability and a business enabler.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Before enabling a sync job with an external system, what planning step prevents loops?"
+  :options="[&quot;Define a clear system of record and direction for each entity&quot;, &quot;Schedule the job to run every minute so latency is minimal&quot;, &quot;Disable conflict handling to keep the pipeline simple&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Knowing which system wins avoids ping-pong updates.&quot;, &quot;Excessive frequency magnifies race conditions.&quot;, &quot;Conflict logic is critical when multiple systems edit data.&quot;]"
+/>
+
 ---
 
 ## Synchronization Strategies

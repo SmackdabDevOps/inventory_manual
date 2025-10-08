@@ -17,6 +17,15 @@ But adjustments are powerful and potentially dangerous. They can create or destr
 
 Understanding when and how to make adjustments—and equally important, when not to make them—is crucial for maintaining accurate inventory. This chapter will show you how to use adjustments effectively while maintaining proper controls and audit trails.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="After a cycle count variance is confirmed, what should you do before posting an adjustment?"
+  :options="[&quot;Document the investigation and reason so finance and auditors see the trail&quot;, &quot;Immediately delete the location and recreate it with the correct balance&quot;, &quot;Wait until month end so the variance rolls into financial close automatically&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Auditors expect a reasoned trail that explains why inventory changed.&quot;, &quot;Deleting a location destroys the audit history and causes more problems.&quot;, &quot;Delaying the entry hides the variance and distorts period reporting.&quot;]"
+/>
+
 ---
 
 ## When to Make Adjustments

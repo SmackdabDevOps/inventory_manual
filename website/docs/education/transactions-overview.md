@@ -17,6 +17,15 @@ But transactions are more than just records. They're the foundation of truth in 
 
 Understanding transactions means understanding how your inventory really works. Not just the current state, but how it got that way and where it's going. Every successful inventory operation starts with mastering the transaction fundamentals.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What do the transaction states guard against?"
+  :options="[&quot;They prevent illegal moves and keep audit trails intact&quot;, &quot;They accelerate picking by skipping confirmations&quot;, &quot;They let you bypass approvals during emergencies&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;States ensure only valid progressions are allowed.&quot;, &quot;Skipping confirmations would break control.&quot;, &quot;Emergency overrides still respect approval rules.&quot;]"
+/>
+
 ---
 
 ## Understanding Transaction Types

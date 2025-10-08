@@ -17,6 +17,15 @@ But purchase orders are complex, involving product specifications, pricing negot
 
 Understanding how to create and manage purchase orders effectively—from initial creation through final closure—is essential for procurement excellence and operational success. This chapter will show you how to master purchase orders as both a procurement tool and a business control mechanism.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why use release rules and approvals on purchase orders?"
+  :options="[&quot;To prevent unauthorized spend before it hits your suppliers&quot;, &quot;To auto create transfer orders from every PO&quot;, &quot;To avoid submitting vendor compliance documents&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Approvals enforce policy and budget controls.&quot;, &quot;Transfer orders are separate documents.&quot;, &quot;Compliance paperwork still needs to be provided.&quot;]"
+/>
+
 ---
 
 ## Purchase Order Workflow

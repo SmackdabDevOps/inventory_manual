@@ -12,6 +12,15 @@ But lot tracking is more than just grouping products—it's about quality contro
 
 Understanding how to implement and manage lot and batch tracking effectively—from initial lot creation through complete lifecycle management—is essential for businesses dealing with manufactured goods, consumables, or regulated products. This chapter will show you how to master lot tracking as both an operational necessity and a quality assurance tool.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why record attributes like expiration or manufacture date with each lot?"
+  :options="[&quot;So you can trace affected inventory quickly during a recall or audit&quot;, &quot;So the system can merge lots together later for simplicity&quot;, &quot;So pickers can ignore FIFO rules because age no longer matters&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Attributes let you isolate specific product when issues arise.&quot;, &quot;Combining lots erases traceability and is unsafe.&quot;, &quot;FIFO discipline still applies when freshness matters.&quot;]"
+/>
+
 ---
 
 ## Lot Tracking Fundamentals

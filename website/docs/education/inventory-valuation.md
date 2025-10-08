@@ -17,6 +17,15 @@ But inventory valuation is more than just applying unit costs—it involves cost
 
 Understanding how to design and manage inventory valuation effectively—from costing method selection through variance analysis—is essential for financial accuracy and business success. This chapter will show you how to master inventory valuation as both a financial discipline and a strategic capability.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why is it risky to mix costing methods within the same valuation area?"
+  :options="[&quot;Because it produces inconsistent gross margin reporting for that stock pool&quot;, &quot;Because the system refuses to price outbound shipments entirely&quot;, &quot;Because auditors forbid any costing method other than FIFO&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Different methods produce different cost flows, so mixing confuses analysis.&quot;, &quot;Shipments can still price, but the data becomes inconsistent.&quot;, &quot;Auditors allow multiple methods when applied consistently.&quot;]"
+/>
+
 ---
 
 ## Costing Methods and Standards

@@ -17,6 +17,15 @@ That's what allocations do—they're promises backed by real inventory. They bri
 
 But allocations become even more powerful when you add serial number tracking. Now you're not just promising "a control module"—you're promising "control module SN-2025-5001," and you can track that exact unit from reservation through delivery. Every step is documented, every movement is traceable, and every promise is kept.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Which allocation state means the inventory is reserved but still physically on your shelf?"
+  :options="[&quot;Allocated&quot;, &quot;Open&quot;, &quot;In Transit&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Allocated marks the promise and reduces available to sell.&quot;, &quot;Open means nothing has been secured yet.&quot;, &quot;In Transit indicates the item already left the facility.&quot;]"
+/>
+
 ---
 
 ## Understanding the Allocation Lifecycle

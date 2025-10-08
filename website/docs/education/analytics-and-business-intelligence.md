@@ -17,6 +17,15 @@ But analytics is more than just generating reports—it's about identifying patt
 
 Understanding how to design and use analytics effectively—from basic metrics through advanced business intelligence—is essential for inventory excellence and strategic success. This chapter will show you how to master analytics as both an operational tool and a strategic capability.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What is the fastest way to spot a fulfillment bottleneck in the analytics workspace?"
+  :options="[&quot;Track the overdue orders widget and drill into the associated flow chart&quot;, &quot;Export raw pick data to spreadsheets each evening&quot;, &quot;Wait for customer service to escalate delayed shipments&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;The dashboard highlights aging demand and shows where it is stuck.&quot;, &quot;Spreadsheets slow you down and lack live context.&quot;, &quot;Escalations are reactive and arrive after service levels slip.&quot;]"
+/>
+
 ---
 
 ## Analytics Fundamentals

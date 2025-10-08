@@ -12,6 +12,15 @@ But API integration is more than just connecting systems—it involves authentic
 
 Understanding how to design and implement API integrations effectively—from authentication through monitoring—is essential for modern business operations. This chapter will show you how to master API integration as both a technical capability and a strategic enabler.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="When building an integration, why is the contract-first OpenAPI schema so important?"
+  :options="[&quot;It guarantees that payloads match what Smackdab validates in production&quot;, &quot;It lets you skip authentication because the schema is public&quot;, &quot;It replaces the need for sandbox testing entirely&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;The schema defines required fields, data types, and validation rules.&quot;, &quot;Authentication is enforced separately and always required.&quot;, &quot;You should still test flows end to end in sandbox environments.&quot;]"
+/>
+
 ---
 
 ## API Architecture and Design

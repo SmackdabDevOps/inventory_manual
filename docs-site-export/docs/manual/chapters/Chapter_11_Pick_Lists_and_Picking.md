@@ -12,6 +12,15 @@ But effective picking is more complex than it might first appear. It involves ro
 
 Understanding how to create and execute pick lists effectively—from simple single-order picks to complex wave-based operations—is essential for warehouse efficiency and customer satisfaction. This chapter will show you how to master pick lists as both an operational tool and a competitive advantage.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What is the main benefit of clustering picks by zone?"
+  :options="[&quot;It reduces travel time so pickers stay in concentrated areas&quot;, &quot;It guarantees perfect cartonization without planning&quot;, &quot;It removes the need to verify items at pack out&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Less travel boosts throughput and reduces fatigue.&quot;, &quot;Cartonization still requires configuration or planning.&quot;, &quot;Verification at pack out remains a required control.&quot;]"
+/>
+
 ---
 
 ## Pick List Workflow

@@ -12,6 +12,15 @@ A well-managed returns process does more than just handle problems—it builds c
 
 Understanding how to execute the complete returns process—from initial authorization through final disposition—is essential for maintaining customer satisfaction while protecting your business interests. This chapter will show you how to master returns management as both a customer service tool and an operational necessity.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why triage a return before granting RMA approval?"
+  :options="[&quot;To confirm the product, condition, and reason align with policy&quot;, &quot;To ensure the customer waits longer so expectations stay low&quot;, &quot;To avoid documenting serial numbers on the RMA record&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Up front checks prevent surprise write offs later.&quot;, &quot;Delays hurt service levels and loyalty.&quot;, &quot;Traceability matters even during returns.&quot;]"
+/>
+
 ---
 
 ## The Returns Process

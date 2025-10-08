@@ -12,6 +12,15 @@ But serial tracking is more than just record-keeping—it's about compliance, wa
 
 Understanding how to implement and manage serial number tracking effectively—from initial registration through complete lifecycle management—is essential for businesses dealing with high-value, regulated, or warranty-sensitive products. This chapter will show you how to master serial tracking as both a compliance requirement and a competitive advantage.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why should technicians record the exact serial issued to a job?"
+  :options="[&quot;So warranty and recall tracing points to the right unit later&quot;, &quot;So costing can blend the serial into average cost immediately&quot;, &quot;So the system can reuse the serial number for another item&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Knowing the specific serial supports service history and recalls.&quot;, &quot;Costing uses layers but does not need manual serial blending.&quot;, &quot;Serial numbers remain unique identifiers and are never reused.&quot;]"
+/>
+
 ---
 
 ## Serial Tracking Basics

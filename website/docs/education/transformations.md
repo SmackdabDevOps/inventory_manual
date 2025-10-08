@@ -17,6 +17,15 @@ But transformations are more than just changing products—they involve bill of 
 
 Understanding how to design and manage transformation operations effectively—from BOM definition through execution and variance management—is essential for businesses that add value through processing, modification, or customization. This chapter will show you how to master transformations as both an operational capability and a strategic advantage.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Before running a transformation, what planning step avoids stranded stock?"
+  :options="[&quot;Confirm demand exists for the outputs and that inputs are fully allocated&quot;, &quot;Disable serial tracking on the inputs so the job runs faster&quot;, &quot;Ignore scrap factors until after the build completes&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Planning ensures the conversion feeds real demand.&quot;, &quot;Serial rules must stay intact for traceability.&quot;, &quot;Scrap should be accounted for up front to set expectations.&quot;]"
+/>
+
 ---
 
 ## Transformation Fundamentals

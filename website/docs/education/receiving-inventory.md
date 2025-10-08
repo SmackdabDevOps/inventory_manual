@@ -17,6 +17,15 @@ Think of receiving as the foundation of inventory accuracy. Every allocation you
 
 This chapter will show you how to master receiving: from simple purchase order deliveries to complex scenarios involving serial numbers, quality inspections, and approval workflows. You'll learn not just how to receive inventory, but how to receive it right the first time, every time.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why is staging and inspecting receipts before put away critical?"
+  :options="[&quot;It catches damage or mislabels so bad stock never reaches bins&quot;, &quot;It lets receivers skip updating cost layers&quot;, &quot;It ensures carriers send fewer trucks next week&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Quality gates stop defective goods from contaminating inventory.&quot;, &quot;Cost updates happen automatically from the receipt transaction.&quot;, &quot;Carrier schedules are negotiated separately.&quot;]"
+/>
+
 ---
 
 ## The Receiving Process

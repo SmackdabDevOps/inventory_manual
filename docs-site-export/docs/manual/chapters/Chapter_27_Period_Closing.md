@@ -12,6 +12,15 @@ But period closing is more than just running reports—it involves cutoff proced
 
 Understanding how to design and manage period closing effectively—from planning through finalization—is essential for financial accuracy and business credibility. This chapter will show you how to master period closing as both a financial discipline and an operational capability.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why lock inventory transactions during the close window?"
+  :options="[&quot;To freeze balances so finance can reconcile without new noise&quot;, &quot;To force warehouses to stop shipping entirely&quot;, &quot;To let IT run database maintenance scripts more easily&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Stable balances are essential for an accurate close.&quot;, &quot;Shipping may continue via controlled exceptions if needed.&quot;, &quot;Maintenance jobs are unrelated to closing controls.&quot;]"
+/>
+
 ---
 
 ## Closing Window Management

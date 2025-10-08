@@ -17,6 +17,15 @@ But shipping is also where inventory accuracy becomes critical. Every item that 
 
 Understanding how to execute shipping operations effectively—from simple single-item shipments to complex multi-package deliveries—is essential for maintaining both customer satisfaction and inventory accuracy. This chapter will show you how to master the complete shipping and delivery process.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why scan shipments at staging before truck loading?"
+  :options="[&quot;To confirm every pick is present and catch stray totes early&quot;, &quot;To update product cost to the latest average&quot;, &quot;To signal procurement that more cartons are needed&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Verification prevents loading the wrong freight.&quot;, &quot;Cost changes are unrelated to staging scans.&quot;, &quot;Carton planning follows packaging analysis, not staging scans.&quot;]"
+/>
+
 ---
 
 ## Shipping Process

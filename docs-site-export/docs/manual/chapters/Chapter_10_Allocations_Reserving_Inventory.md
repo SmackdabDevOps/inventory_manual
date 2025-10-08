@@ -12,6 +12,15 @@ But allocations are more complex than simple reservations. They track inventory 
 
 Understanding how to use allocations effectively—from simple reservations to complex multi-state tracking—is essential for maintaining customer satisfaction while optimizing inventory utilization. This chapter will show you how to master allocations as both a customer service tool and an operational necessity.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why link allocations to the purchase orders that will cover the demand?"
+  :options="[&quot;So inbound receipts are steered to the waiting customer without manual chasing&quot;, &quot;So accounting can override the cost layer on the next close&quot;, &quot;So procurement can bypass the normal approval workflow&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Linking ensures the system knows which receipts satisfy the promise.&quot;, &quot;Cost layers are handled separately from the allocation record.&quot;, &quot;Approvals remain in place regardless of allocation links.&quot;]"
+/>
+
 ---
 
 ## Understanding Allocations

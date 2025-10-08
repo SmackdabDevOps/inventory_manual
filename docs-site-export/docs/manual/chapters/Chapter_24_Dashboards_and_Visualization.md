@@ -12,6 +12,15 @@ But dashboards are more than just pretty charts—they're decision support syste
 
 Understanding how to design and use dashboards effectively—from operational monitoring through strategic oversight—is essential for data-driven management and organizational agility. This chapter will show you how to master dashboards as both information systems and decision-making tools.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Why should teams pin the dashboards that mirror their daily role?"
+  :options="[&quot;So alerts and tiles surface the trends they need without hunting each morning&quot;, &quot;So their widgets load faster than everyone else&quot;, &quot;So permissions on the data model automatically expand&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Pinned dashboards keep the most relevant visuals front and center.&quot;, &quot;Performance does not depend on who pins a card.&quot;, &quot;Security is controlled by roles, not dashboard pins.&quot;]"
+/>
+
 ---
 
 ## Dashboard Design Principles

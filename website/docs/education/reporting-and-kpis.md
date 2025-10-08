@@ -17,6 +17,15 @@ But reporting is more than just generating documents—it's about understanding 
 
 Understanding how to design and manage reporting systems effectively—from operational dashboards through executive summaries—is essential for organizational alignment and performance management. This chapter will show you how to master reporting as both a communication tool and a management system.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What makes a KPI actionable for the operations team?"
+  :options="[&quot;It ties to a clear owner and cadence with defined thresholds&quot;, &quot;It uses the most complex calculation available&quot;, &quot;It changes colors randomly to get attention&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Ownership and thresholds drive behavior changes.&quot;, &quot;Complexity without clarity reduces adoption.&quot;, &quot;Random styling erodes trust in the metric.&quot;]"
+/>
+
 ---
 
 ## Report Types and Purposes

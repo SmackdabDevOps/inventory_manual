@@ -17,6 +17,15 @@ But service management is more than just scheduling—it involves service catalo
 
 Understanding how to design and manage service operations effectively—from service definition through work order completion—is essential for businesses that combine products and services into comprehensive customer solutions. This chapter will show you how to master service management as both an operational capability and a strategic differentiator.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="Before dispatching a technician, what check keeps service orders on track?"
+  :options="[&quot;Verify the van inventory has the allocated parts and required tools&quot;, &quot;Confirm the technician has liked the customer in the CRM&quot;, &quot;Reduce the promised SLA window to create urgency&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Stocking the vehicle prevents onsite delays.&quot;, &quot;CRM preferences are unrelated to readiness.&quot;, &quot;Changing the SLA erodes trust and does not solve readiness.&quot;]"
+/>
+
 ---
 
 ## Service Catalog Management

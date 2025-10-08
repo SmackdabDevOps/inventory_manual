@@ -17,6 +17,15 @@ But backorders are more than just delayed shipments. They represent broken promi
 
 Understanding how to manage backorders effectively—from creation through resolution—is essential for maintaining customer satisfaction while minimizing business impact. This chapter will show you how to master backorder management as both a customer service tool and an operational necessity.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="When inventory is short, what should you do before approving a backorder promise date?"
+  :options="[&quot;Check inbound supply and competing allocations to confirm the date is realistic&quot;, &quot;Assume the supplier lead time is always accurate and confirm immediately&quot;, &quot;Convert the order to an adjustment so you can post the quantity later&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;You need to validate supply and demand before making a commitment.&quot;, &quot;Lead times drift and must be validated against live data.&quot;, &quot;Adjustments do not fulfill customer demand and break audit trails.&quot;]"
+/>
+
 ---
 
 ## Backorder Management

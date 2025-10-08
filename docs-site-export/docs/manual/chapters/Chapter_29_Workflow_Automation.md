@@ -12,6 +12,15 @@ But workflow automation is more than just scripting tasks—it involves process 
 
 Understanding how to design and implement workflow automation effectively—from simple triggers through complex orchestrations—is essential for operational excellence and competitive advantage. This chapter will show you how to master workflow automation as both an operational capability and a strategic differentiator.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What should you validate before enabling an automation rule on live data?"
+  :options="[&quot;Test it in a sandbox and confirm it only triggers on the intended conditions&quot;, &quot;Enable it in production first and roll back if users complain&quot;, &quot;Disable alerting so the rule can run silently&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Testing ensures the rule behaves as designed.&quot;, &quot;Deploying without validation risks cascading errors.&quot;, &quot;Silent automations hide what the system is doing.&quot;]"
+/>
+
 ---
 
 ## Process Design and Modeling

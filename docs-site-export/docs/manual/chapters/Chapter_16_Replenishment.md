@@ -12,6 +12,15 @@ But effective replenishment is complex, involving demand forecasting, lead time 
 
 Understanding how to design and manage replenishment systems effectively—from rule configuration through performance optimization—is essential for inventory excellence and business success. This chapter will show you how to master replenishment as both an operational necessity and a strategic capability.
 
+### Quick Confidence Check
+
+<LearningQuiz
+  question="What signal should trigger an internal replenishment transfer?"
+  :options="[&quot;Location demand hitting or projecting below its reorder point&quot;, &quot;The destination requesting a new bin name&quot;, &quot;A picker reporting a label smudge during a wave&quot;]"
+  :answer-index="0"
+  :explanations="[&quot;Reorder logic keeps forward pick faces stocked.&quot;, &quot;Naming changes do not require stock moves.&quot;, &quot;Label smudges are an operations issue, not replenishment.&quot;]"
+/>
+
 ---
 
 ## Replenishment Rules
