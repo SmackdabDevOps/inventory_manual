@@ -34,6 +34,9 @@ export default defineConfig({
   description: 'Contract-grounded user manual for the Smackdab Inventory platform',
   cleanUrls: true,
   head,
+  markdown: {
+    mermaid: true
+  },
   themeConfig: {
     logo: { src: '/logo.svg', alt: 'Smackdab' },
     nav: [
