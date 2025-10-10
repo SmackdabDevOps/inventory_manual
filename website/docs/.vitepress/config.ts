@@ -1,5 +1,4 @@
 import { defineConfig } from 'vitepress'
-import mdItMermaid from 'markdown-it-mermaid'
 import educationSidebar from './generated/education-sidebar.json'
 
 // Analytics injection via environment variables at build time
@@ -37,8 +36,19 @@ export default defineConfig({
   head,
   markdown: {
     config: (md) => {
-      const mermaidPlugin = (mdItMermaid as unknown as { default?: unknown })
-      md.use((mermaidPlugin.default ?? mermaidPlugin) as any)
+      const defaultFence = md.renderer.rules.fence?.bind(md.renderer.rules)
+      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        const info = (token.info || '').trim()
+        if (info === 'mermaid') {
+          const code = token.content.trim()
+          const encoded = Buffer.from(code, 'utf8').toString('base64')
+          return `<div class="mermaid" data-mermaid data-code="${encoded}"></div>`
+        }
+        return defaultFence
+          ? defaultFence(tokens, idx, options, env, self)
+          : self.renderToken(tokens, idx, options)
+      }
     }
   },
   vite: {
