@@ -34,28 +34,6 @@ export default defineConfig({
   description: 'Contract-grounded user manual for the Smackdab Inventory platform',
   cleanUrls: true,
   head,
-  markdown: {
-    config: (md) => {
-      const defaultFence = md.renderer.rules.fence?.bind(md.renderer.rules)
-      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
-        const token = tokens[idx]
-        const info = (token.info || '').trim()
-        if (info === 'mermaid') {
-          const code = token.content.trim()
-          const encoded = Buffer.from(code, 'utf8').toString('base64')
-          return `<div class="mermaid" data-mermaid data-code="${encoded}"></div>`
-        }
-        return defaultFence
-          ? defaultFence(tokens, idx, options, env, self)
-          : self.renderToken(tokens, idx, options)
-      }
-    }
-  },
-  vite: {
-    optimizeDeps: {
-      include: ['mermaid']
-    }
-  },
   themeConfig: {
     logo: { src: '/logo.svg', alt: 'Smackdab' },
     nav: [
