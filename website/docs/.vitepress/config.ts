@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import mdItMermaid from 'markdown-it-mermaid'
 import educationSidebar from './generated/education-sidebar.json'
 
 // Analytics injection via environment variables at build time
@@ -35,7 +36,15 @@ export default defineConfig({
   cleanUrls: true,
   head,
   markdown: {
-    mermaid: true
+    config: (md) => {
+      const mermaidPlugin = (mdItMermaid as unknown as { default?: unknown })
+      md.use((mermaidPlugin.default ?? mermaidPlugin) as any)
+    }
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['mermaid']
+    }
   },
   themeConfig: {
     logo: { src: '/logo.svg', alt: 'Smackdab' },

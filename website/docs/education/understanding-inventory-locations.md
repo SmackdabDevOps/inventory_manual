@@ -155,7 +155,7 @@ Let's start with the basics: creating a new location.
 
    **Drop Ship** — A virtual location representing inventory that ships directly from supplier to customer, never touching your warehouse. Use this for tracking orders where the supplier ships directly to your customer. The system records the transaction without requiring receiving or shipping from your facility and updates inventory as "sold" without ever showing "in stock." If you use a regular warehouse, you'll try to physically receive items that never arrive.
 
-   **Decision guide:** Start with your building (Warehouse/Store), divide it into areas (Zone), create storage spots (Bin). Need inspection holds? Use Quarantine. Tracking tech vans? Use Service Vehicle. Storing items at customer locations? Use Customer Site. Need placeholders for in-transit items? Use Virtual.
+  **Decision guide:** Start with your building (Warehouse/Store), divide it into areas (Zone), create storage spots (Bin). Need inspection holds? Use Quarantine. Tracking tech vans? Use Service Vehicle. Storing items at customer locations? Use Customer Site. Need placeholders for in-transit items? Use Virtual.
 
 ```mermaid
 flowchart TD
