@@ -42,10 +42,15 @@ export default {
           const id = `mermaid-${Date.now()}-${index}`
           try {
             const { mermaidAPI } = mermaid
-            mermaidAPI.render(id, code, (svg) => {
-              block.innerHTML = svg
-              block.dataset.rendered = 'true'
-            })
+            mermaidAPI.render(
+              id,
+              code,
+              (svg) => {
+                block.innerHTML = svg
+                block.dataset.rendered = 'true'
+              },
+              block
+            )
           } catch (error) {
             console.error('Failed to render Mermaid diagram', error)
           }
