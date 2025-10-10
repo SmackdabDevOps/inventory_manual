@@ -153,7 +153,7 @@ Let's start with the basics: creating a new location.
   **Decision guide:** Start with your building (Warehouse/Store), divide it into areas (Zone), create storage spots (Bin). Need inspection holds? Use Quarantine. Tracking tech vans? Use Service Vehicle. Storing items at customer locations? Use Customer Site. Need placeholders for in-transit items? Use Virtual.
 
 ```mermaid
-flowchart TD
+graph TD
   Start[Need a new location] --> Choice{What kind of space is it?}
 
   Choice -->|Entire facility| Warehouse[Warehouse / Store]
@@ -166,12 +166,12 @@ flowchart TD
   Choice -->|Logical placeholder| Virtual
   Choice -->|Supplier ships direct| DropShip
 
-  Warehouse --> Behavior1[Top-level parent<br/>Contains zones]
+  Warehouse --> Behavior1[Top-level parent\\nContains zones]
   Zone --> Behavior2[Passes rules to children]
-  Bin --> Behavior3[Final storage<br/>No children]
+  Bin --> Behavior3[Final storage\\nNo children]
   Quarantine --> Behavior4[Requires release workflows]
-  ServiceVehicle --> Behavior5[Enforces weight limits<br/>Technician assignment]
-  CustomerSite --> Behavior6[Linked to customer<br/>Reconciliation schedules]
+  ServiceVehicle --> Behavior5[Enforces weight limits\\nTechnician assignment]
+  CustomerSite --> Behavior6[Linked to customer\\nReconciliation schedules]
   Mobile --> Behavior7[Quick activate / deactivate]
   Virtual --> Behavior8[Tracks in-transit/system states]
   DropShip --> Behavior9[Records sale without receipt]
