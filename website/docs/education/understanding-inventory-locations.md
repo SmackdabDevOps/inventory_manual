@@ -157,6 +157,31 @@ Let's start with the basics: creating a new location.
 
    **Decision guide:** Start with your building (Warehouse/Store), divide it into areas (Zone), create storage spots (Bin). Need inspection holds? Use Quarantine. Tracking tech vans? Use Service Vehicle. Storing items at customer locations? Use Customer Site. Need placeholders for in-transit items? Use Virtual.
 
+```mermaid
+flowchart TD
+  Start[Need a new location] --> Choice{What kind of space is it?}
+
+  Choice -->|Entire facility| Warehouse[Warehouse / Store]
+  Choice -->|Functional area| Zone
+  Choice -->|Specific storage spot| Bin
+  Choice -->|Inspection hold| Quarantine
+  Choice -->|Technician vehicle| ServiceVehicle
+  Choice -->|Customer-owned space| CustomerSite
+  Choice -->|Temporary / mobile| Mobile
+  Choice -->|Logical placeholder| Virtual
+  Choice -->|Supplier ships direct| DropShip
+
+  Warehouse --> Behavior1[Top-level parent<br/>Contains zones]
+  Zone --> Behavior2[Passes rules to children]
+  Bin --> Behavior3[Final storage<br/>No children]
+  Quarantine --> Behavior4[Requires release workflows]
+  ServiceVehicle --> Behavior5[Enforces weight limits<br/>Technician assignment]
+  CustomerSite --> Behavior6[Linked to customer<br/>Reconciliation schedules]
+  Mobile --> Behavior7[Quick activate / deactivate]
+  Virtual --> Behavior8[Tracks in-transit/system states]
+  DropShip --> Behavior9[Records sale without receipt]
+```
+
    The type locks in certain behaviors. You can't convert a service vehicle into a regular bin without emptying it and removing the technician assignment. Choose correctly from the start.
 
 4. **Select a parent** — Where does this location live? A bin goes inside a zone, a zone goes inside a warehouse. This creates your hierarchy. The parent determines what rules your new location inherits. If you put a frozen bin inside a room-temperature zone, you'll create conflicts. Match the parent's characteristics or plan to override them explicitly.

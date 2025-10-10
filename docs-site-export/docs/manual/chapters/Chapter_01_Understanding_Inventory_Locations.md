@@ -150,7 +150,32 @@ Let's start with the basics: creating a new location.
 
    **Drop Ship** — A virtual location representing inventory that ships directly from supplier to customer, never touching your warehouse. Use this for tracking orders where the supplier ships directly to your customer. The system records the transaction without requiring receiving or shipping from your facility and updates inventory as "sold" without ever showing "in stock." If you use a regular warehouse, you'll try to physically receive items that never arrive.
 
-   **Decision guide:** Start with your building (Warehouse/Store), divide it into areas (Zone), create storage spots (Bin). Need inspection holds? Use Quarantine. Tracking tech vans? Use Service Vehicle. Storing items at customer locations? Use Customer Site. Need placeholders for in-transit items? Use Virtual.
+  **Decision guide:** Start with your building (Warehouse/Store), divide it into areas (Zone), create storage spots (Bin). Need inspection holds? Use Quarantine. Tracking tech vans? Use Service Vehicle. Storing items at customer locations? Use Customer Site. Need placeholders for in-transit items? Use Virtual.
+
+```mermaid
+flowchart TD
+  Start[Need a new location] --> Choice{What kind of space is it?}
+
+  Choice -->|Entire facility| Warehouse[Warehouse / Store]
+  Choice -->|Functional area| Zone
+  Choice -->|Specific storage spot| Bin
+  Choice -->|Inspection hold| Quarantine
+  Choice -->|Technician vehicle| ServiceVehicle
+  Choice -->|Customer-owned space| CustomerSite
+  Choice -->|Temporary / mobile| Mobile
+  Choice -->|Logical placeholder| Virtual
+  Choice -->|Supplier ships direct| DropShip
+
+  Warehouse --> Behavior1[Top-level parent<br/>Contains zones]
+  Zone --> Behavior2[Passes rules to children]
+  Bin --> Behavior3[Final storage<br/>No children]
+  Quarantine --> Behavior4[Requires release workflows]
+  ServiceVehicle --> Behavior5[Enforces weight limits<br/>Technician assignment]
+  CustomerSite --> Behavior6[Linked to customer<br/>Reconciliation schedules]
+  Mobile --> Behavior7[Quick activate / deactivate]
+  Virtual --> Behavior8[Tracks in-transit/system states]
+  DropShip --> Behavior9[Records sale without receipt]
+```
 
    The type locks in certain behaviors. You can't convert a service vehicle into a regular bin without emptying it and removing the technician assignment. Choose correctly from the start.
 
